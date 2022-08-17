@@ -51,4 +51,185 @@ body {
   }
 }
 
+.btn-small, .btn-small:link, .btn-small:visited, .btn {
+  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
+  border-radius: 10rem;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+.btn-small:hover, .btn:hover {
+  transform: scale(1.05);
+}
+.btn-small:focus, .btn:focus {
+  outline: none;
+}
+.btn-small > *:first-child, .btn > *:first-child {
+  margin-right: 1rem;
+}
+
+.btn {
+  padding: 1.5rem 4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.btn svg {
+  height: 2.25rem;
+  width: 2.25rem;
+  fill: currentColor;
+}
+
+.btn-small, .btn-small:link, .btn-small:visited {
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1.25rem 2.25rem;
+  text-decoration: none;
+}
+.btn-small svg, .btn-small:link svg, .btn-small:visited svg {
+  height: 1.75rem;
+  width: 1.75rem;
+  fill: currentColor;
+}
+
+.btn-inline {
+  color: #f38e82;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  background-color: #f9f5f3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+.btn-inline svg {
+  height: 1.6rem;
+  width: 1.6rem;
+  fill: currentColor;
+  margin: 0 0.2rem;
+}
+.btn-inline span {
+  margin: 0 0.4rem;
+}
+.btn-inline:hover {
+  color: #f48982;
+  background-color: #f2efee;
+}
+.btn-inline:focus {
+  outline: none;
+}
+
+.btn-round {
+  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  height: 4.5rem;
+  width: 4.5rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-round:hover {
+  transform: scale(1.07);
+}
+.btn-round:focus {
+  outline: none;
+}
+.btn-round svg {
+  height: 2.5rem;
+  width: 2.5rem;
+  fill: #fff;
+}
+
+.btn-tiny {
+  height: 2rem;
+  width: 2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.btn-tiny svg {
+  height: 100%;
+  width: 100%;
+  fill: #f38e82;
+  transition: all 0.3s;
+}
+.btn-tiny:focus {
+  outline: none;
+}
+.btn-tiny:hover svg {
+  fill: #f48982;
+  transform: translateY(-1px);
+}
+.btn-tiny:active svg {
+  fill: #f48982;
+  transform: translateY(0);
+}
+.btn-tiny:not(:last-child) {
+  margin-right: 0.3rem;
+}
+
+.heading-2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f38e82;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.link:link,
+.link:visited {
+  color: #918581;
+}
+
+.spinner {
+  margin: 5rem auto;
+  text-align: center;
+}
+.spinner svg {
+  height: 6rem;
+  width: 6rem;
+  fill: #f38e82;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.message,
+.error {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  display: flex;
+}
+.message svg,
+.error svg {
+  height: 3rem;
+  width: 3rem;
+  fill: #f38e82;
+  transform: translateY(-0.3rem);
+}
+.message p,
+.error p {
+  margin-left: 1.5rem;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
 /*# sourceMappingURL=style.css.map */
