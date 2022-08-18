@@ -311,5 +311,49 @@ body {
   display: flex;
   align-items: center;
 }
+.nav-btn svg {
+  height: 2.4rem;
+  width: 2.4rem;
+  fill: #f38e82;
+  margin-right: 0.7rem;
+  transform: translateY(-1px);
+}
+.nav-btn:focus {
+  outline: none;
+}
+.nav-btn:hover {
+  background-color: #f2efee;
+}
+
+.bookmarks {
+  padding: 1rem 0;
+  position: absolute;
+  right: -2.5rem;
+  z-index: 10;
+  width: 40rem;
+  background-color: #fff;
+  box-shadow: 0 0.8rem 5rem 2rem rgba(97, 85, 81, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s 0.2s;
+}
+.bookmarks-list {
+  list-style: none;
+}
+.bookmarks-field {
+  cursor: pointer;
+  padding: 0 4rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: all 0.3s;
+}
+.bookmarks-field:hover {
+  background-color: #f2efee;
+}
+.bookmarks:hover, .nav-btn-bookmark:hover + .bookmarks {
+  visibility: visible;
+  opacity: 1;
+}
 
 /*# sourceMappingURL=style.css.map */

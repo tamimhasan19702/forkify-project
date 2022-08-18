@@ -80,6 +80,58 @@
 
         display: flex;
         align-items: center;
+
+        svg{
+            height: 2.4rem;
+            width: 2.4rem;
+            fill: $color-primary;
+            margin-right: 0.7rem;
+            transform: translateY(-1px);
+        }
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            background-color: $color-grey-light-2;
+        }
     }
 
+}
+
+.bookmarks{
+    padding: 1rem 0;
+    position: absolute;
+    //right: 0;
+    right: -2.5rem;
+    z-index: 10;
+    width: 40rem;
+    background-color: #fff;
+    box-shadow: 0 0.8rem 5rem 2rem rgba($color-grey-dark-1, 0.1);
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s 0.2s;
+
+    &-list{
+        list-style: none;
+    }
+    &-field{
+        cursor: pointer;
+        padding: 0 4rem;
+
+        display: flex;
+        align-items: center;
+        height: 100%;
+        transition: all 0.3s;
+    
+    &:hover{
+        background-color: $color-grey-light-2;
+    }
+    }
+
+    &:hover,
+    .nav-btn-bookmark:hover + &{
+        visibility: visible;
+        opacity: 1;
+    }
 }
