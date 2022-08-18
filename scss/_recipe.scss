@@ -1,0 +1,99 @@
+.recipe{
+    background-color: $color-grey-light-1;
+
+    //figure
+    &-fig{
+        height: 32rem;
+        position: relative;
+        //transform: scale(1.04) translateY(-1px);
+        transform-origin: top;
+    
+    &::before{
+        content: '';
+        display: block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient(
+            to right bottom,
+            $color-grad-1,
+            $color-grad-2
+        );
+        opacity: 0.6;
+    }    
+   }
+
+   &-img{
+    width: 100%;
+    display: block;
+    height: 100%;
+    object-fit: cover;
+   }
+
+   &-ttile{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,20%) skewY(-6deg);
+    color: #fff;
+    font-weight: 700;
+    font-size: 3.25rem;
+    text-transform: uppercase;
+    width: 50%;
+    line-height: 1.95;
+    text-align: center;
+
+    span{
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        padding: 1.3rem 2rem;
+        background-image: linear-gradient(
+            to right bottom,
+            $color-grad-1,
+            $color-grad-2
+        );
+    }
+   @media only screen and (max-width: $bp-medium){
+    width: 70%;
+   }
+ }
+
+ //details
+ &-details{
+    display: flex;
+    align-items: center;
+    padding: 7.5rem 8rem 3.5rem 8rem;
+ }
+ &-info{
+    font-size: 1.65rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child){
+        margin-right: 4.5rem;
+    }
+ }
+
+ &-info-icon{
+    height: 2.35rem;
+    width: 2.35rem;
+    fill: $color-primary;
+    margin-right: 1.15rem;
+ }
+ &-info-data{
+    margin-right: 0.5rem;
+    font-weight: 700;
+ }
+ &-info-buttons{
+    display: flex;
+    margin-left: 1.6rem;
+    transform: translateY(-1px);
+ }
+
+ &-user-generated{
+    background-color: ;
+ }
+}
