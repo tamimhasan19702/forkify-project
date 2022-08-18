@@ -2,9 +2,11 @@
     grid-area: head;
     background-color: $color-grey-light-1;
     display: flex;
+    width: 100%;
+    height: 10rem;
     align-items: center;
     justify-content: space-between;
- &-logo{
+    &-logo{
     margin-left: 4rem;
     height: 4.6rem;
     display: block;

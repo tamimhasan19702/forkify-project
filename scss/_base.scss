@@ -66,7 +66,9 @@ body{
     display: grid;
     grid-template-columns: 10rem minmax(100rem,auto);
     grid-template-columns: 1fr 2fr;
-    grid-template-areas: 'head head' 'list recipe';
+    grid-template-areas: 
+    'head head' 
+    'list recipe';
 
     @media only screen and (max-width: $bp-large){
         max-width: 100%;
