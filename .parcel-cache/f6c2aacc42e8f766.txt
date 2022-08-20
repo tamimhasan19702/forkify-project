@@ -1,4 +1,4 @@
-4340
+4341
 103F:\Journey to the mern stack development\forkify project\node_modules\cosmiconfig\dist\loaders.d.ts.map133054586600641860 0
 91F:\Journey to the mern stack development\forkify project\node_modules\cosmiconfig\README.md133054586602526814 0
 98F:\Journey to the mern stack development\forkify project\node_modules\escape-string-regexp\license133054586579621289 0
@@ -10,7 +10,7 @@
 78F:\Journey to the mern stack development\forkify project\node_modules\svgo\lib133054586610450844 1
 95F:\Journey to the mern stack development\forkify project\node_modules\lines-and-columns\LICENSE133054586578906628 0
 125F:\Journey to the mern stack development\forkify project\node_modules\lmdb\dependencies\lmdb-data-v1\libraries\liblmdb\midl.c133054586607004931 0
-61F:\Journey to the mern stack development\forkify project\dist133054620829189981 1
+61F:\Journey to the mern stack development\forkify project\dist133054974738940376 1
 101F:\Journey to the mern stack development\forkify project\node_modules\source-map\lib\binary-search.js133054586587991055 0
 101F:\Journey to the mern stack development\forkify project\node_modules\@parcel\workers\src\Profiler.js133054586601948367 0
 114F:\Journey to the mern stack development\forkify project\node_modules\dom-serializer\node_modules\entities\LICENSE133054586572310950 0
@@ -51,7 +51,7 @@
 94F:\Journey to the mern stack development\forkify project\node_modules\json5\lib\stringify.d.ts133054586597583402 0
 82F:\Journey to the mern stack development\forkify project\node_modules\terser\tools133054586609273983 1
 116F:\Journey to the mern stack development\forkify project\node_modules\@swc\helpers\src\_class_private_field_init.mjs133054586611248942 0
-73F:\Journey to the mern stack development\forkify project\src\js\script.js133054620827843573 0
+73F:\Journey to the mern stack development\forkify project\src\js\script.js133054974754925001 0
 97F:\Journey to the mern stack development\forkify project\node_modules\node-addon-api\CHANGELOG.md133054586597334061 0
 96F:\Journey to the mern stack development\forkify project\node_modules\csso\lib\replace\Number.js133054586604182492 0
 114F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\xml-serializer.js133054586627857787 0
@@ -103,6 +103,7 @@
 109F:\Journey to the mern stack development\forkify project\node_modules\css-tree\lib\syntax\node\Parentheses.js133054586611258951 0
 101F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\regions\CU.js133054586615372481 0
 74F:\Journey to the mern stack development\forkify project\node_modules\.bin133054588290056580 1
+66F:\Journey to the mern stack development\forkify project\README.md133054625543397507 0
 107F:\Journey to the mern stack development\forkify project\node_modules\terser\node_modules\commander\typings133054586584954026 1
 95F:\Journey to the mern stack development\forkify project\node_modules\css-select\lib\compile.js133054586582221916 0
 115F:\Journey to the mern stack development\forkify project\node_modules\csso\lib\restructure\2-initialMergeRuleset.js133054586579651185 0
@@ -140,7 +141,7 @@
 78F:\Journey to the mern stack development\forkify project\src\scss\_header.scss133053318460631901 0
 99F:\Journey to the mern stack development\forkify project\node_modules\terser\node_modules\commander133054586583637548 1
 95F:\Journey to the mern stack development\forkify project\node_modules\css-select\lib\types.d.ts133054586603743668 0
-84F:\Journey to the mern stack development\forkify project\dist\index.e8265c92.css.map133054619386583630 0
+84F:\Journey to the mern stack development\forkify project\dist\index.e8265c92.css.map133054969888841380 0
 103F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\sni.js133054586626104467 0
 110F:\Journey to the mern stack development\forkify project\node_modules\css-what\lib\commonjs\stringify.d.ts.map133054586594727705 0
 88F:\Journey to the mern stack development\forkify project\node_modules\dotenv\lib\main.js133054586587901294 0
@@ -411,7 +412,7 @@
 117F:\Journey to the mern stack development\forkify project\node_modules\@parcel\transformer-json\src\JSONTransformer.js133054586579890549 0
 116F:\Journey to the mern stack development\forkify project\node_modules\svgo\plugins\removeNonInheritableGroupAttrs.js133054586606376618 0
 92F:\Journey to the mern stack development\forkify project\node_modules\commander\CHANGELOG.md133054586584156154 0
-80F:\Journey to the mern stack development\forkify project\dist\index.e8265c92.css133054619386553689 0
+80F:\Journey to the mern stack development\forkify project\dist\index.e8265c92.css133054969888811450 0
 77F:\Journey to the mern stack development\forkify project\node_modules\is-json133054586584136230 1
 106F:\Journey to the mern stack development\forkify project\node_modules\css-what\lib\commonjs\stringify.d.ts133054586598934955 0
 101F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\regions\KN.js133054586619142334 0
@@ -798,9 +799,9 @@
 89F:\Journey to the mern stack development\forkify project\node_modules\yaml\browser\seq.js133054586603973055 0
 114F:\Journey to the mern stack development\forkify project\node_modules\lmdb\node_modules\node-addon-api\common.gypi133054586578846833 0
 146F:\Journey to the mern stack development\forkify project\node_modules\@parcel\node-resolver-core\test\fixture\node_modules\package-browser-exclude133054586610879697 1
-102F:\Journey to the mern stack development\forkify project\node_modules\source-map-js\lib\source-node.js133054588265651862 0
 88F:\Journey to the mern stack development\forkify project\node_modules\yaml\browser\types133054586604511608 1
 152F:\Journey to the mern stack development\forkify project\node_modules\@parcel\node-resolver-core\test\fixture\node_modules\package-fallback\package.json133054586610959478 0
+102F:\Journey to the mern stack development\forkify project\node_modules\source-map-js\lib\source-node.js133054588265651862 0
 108F:\Journey to the mern stack development\forkify project\node_modules\terser\lib\utils\first_in_statement.js133054586603085323 0
 91F:\Journey to the mern stack development\forkify project\node_modules\yaml\browser\types.js133054586604820782 0
 95F:\Journey to the mern stack development\forkify project\node_modules\yaml\browser\types\set.js133054586604142597 0
@@ -1568,8 +1569,8 @@
 93F:\Journey to the mern stack development\forkify project\node_modules\react-refresh\README.md133054586589796241 0
 84F:\Journey to the mern stack development\forkify project\node_modules\dotenv\LICENSE133054586580685920 0
 122F:\Journey to the mern stack development\forkify project\node_modules\react-refresh\cjs\react-refresh-babel.development.js133054586579671142 0
-129F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\background-repeat-round-space.js133054586606566107 0
 124F:\Journey to the mern stack development\forkify project\node_modules\react-refresh\cjs\react-refresh-runtime.development.js133054586583527849 0
+129F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\background-repeat-round-space.js133054586606566107 0
 120F:\Journey to the mern stack development\forkify project\node_modules\@parcel\workers\test\integration\workerfarm\ipc.js133054586597393913 0
 94F:\Journey to the mern stack development\forkify project\node_modules\@parcel\resolver-default133054586580935238 1
 88F:\Journey to the mern stack development\forkify project\node_modules\lmdb\src\windows.c133054586610051920 0
@@ -1670,7 +1671,6 @@
 87F:\Journey to the mern stack development\forkify project\node_modules\path-type\license133054586580336856 0
 115F:\Journey to the mern stack development\forkify project\node_modules\@parcel\watcher\src\windows\WindowsBackend.hh133054586602826015 0
 89F:\Journey to the mern stack development\forkify project\node_modules\parse-json\index.js133054586579890549 0
-86F:\Journey to the mern stack development\forkify project\node_modules\json5\LICENSE.md133054586594119342 0
 90F:\Journey to the mern stack development\forkify project\node_modules\parse-json\readme.md133054586583386585 0
 92F:\Journey to the mern stack development\forkify project\node_modules\parent-module\index.js133054586572980066 0
 102F:\Journey to the mern stack development\forkify project\node_modules\.bin\node-gyp-build-optional.ps1133054586628176928 0
@@ -2009,6 +2009,7 @@
 97F:\Journey to the mern stack development\forkify project\node_modules\@parcel\workers\lib\process133054586600741598 1
 97F:\Journey to the mern stack development\forkify project\node_modules\lines-and-columns\README.md133054586583687412 0
 79F:\Journey to the mern stack development\forkify project\node_modules\json5\lib133054586598326575 1
+86F:\Journey to the mern stack development\forkify project\node_modules\json5\LICENSE.md133054586594119342 0
 85F:\Journey to the mern stack development\forkify project\node_modules\json5\README.md133054586594538213 0
 86F:\Journey to the mern stack development\forkify project\node_modules\json5\lib\cli.js133054586572380802 0
 91F:\Journey to the mern stack development\forkify project\node_modules\json5\lib\register.js133054586587821495 0
@@ -3353,7 +3354,7 @@
 110F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\use-strict.js133054586627124469 0
 113F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\vector-effect.js133054586627264083 0
 122F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\viewport-unit-variants.js133054586627343861 0
-72F:\Journey to the mern stack development\forkify project\dist\index.html133054619386523775 0
+72F:\Journey to the mern stack development\forkify project\dist\index.html133054969888811450 0
 106F:\Journey to the mern stack development\forkify project\node_modules\@swc\helpers\lib\_sliced_to_array.js133054586609034627 0
 114F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\viewport-units.js133054586627353843 0
 104F:\Journey to the mern stack development\forkify project\node_modules\caniuse-lite\data\features\wasm.js133054586627418925 0
@@ -3918,7 +3919,7 @@
 139F:\Journey to the mern stack development\forkify project\node_modules\@parcel\package-manager\test\fixtures\has-foo\subpackage\package.json133054586604800825 0
 145F:\Journey to the mern stack development\forkify project\node_modules\@parcel\package-manager\test\fixtures\has-foo\node_modules\foo\package.json133054586604352027 0
 126F:\Journey to the mern stack development\forkify project\node_modules\@parcel\package-manager\test\fixtures\empty\package.json133054586604102714 0
-82F:\Journey to the mern stack development\forkify project\dist\favicon.c1b29cd4.png133054619385197328 0
+82F:\Journey to the mern stack development\forkify project\dist\favicon.c1b29cd4.png133054969888701742 0
 115F:\Journey to the mern stack development\forkify project\node_modules\@parcel\package-manager\src\installPackage.js133054586597842719 0
 116F:\Journey to the mern stack development\forkify project\node_modules\@parcel\package-manager\src\JSONParseStream.js133054586598555967 0
 121F:\Journey to the mern stack development\forkify project\node_modules\@parcel\package-manager\src\MockPackageInstaller.js133054586598885088 0
@@ -4198,7 +4199,7 @@
 106F:\Journey to the mern stack development\forkify project\node_modules\@lmdb\lmdb-win32-x64\node.abi93.node133054586601788780 0
 105F:\Journey to the mern stack development\forkify project\node_modules\@lmdb\lmdb-win32-x64\node.napi.node133054586603334658 0
 103F:\Journey to the mern stack development\forkify project\node_modules\@lmdb\lmdb-win32-x64\package.json133054586572669990 0
-83F:\Journey to the mern stack development\forkify project\dist\index.09c24910.js.map133054620829179990 0
+83F:\Journey to the mern stack development\forkify project\dist\index.09c24910.js.map133054974738930410 0
 83F:\Journey to the mern stack development\forkify project\node_modules\@lezer\common133054586585487757 1
 79F:\Journey to the mern stack development\forkify project\node_modules\@lezer\lr133054586585093688 1
 92F:\Journey to the mern stack development\forkify project\node_modules\@lezer\lr\package.json133054586583587684 0
@@ -4334,8 +4335,8 @@
 85F:\Journey to the mern stack development\forkify project\node_modules\.bin\terser.ps1133054586628186914 0
 72F:\Journey to the mern stack development\forkify project\img\favicon.png132886955210000000 0
 69F:\Journey to the mern stack development\forkify project\img\logo.png132886955210000000 0
-89F:\Journey to the mern stack development\forkify project\dist\forkify project.3464ddca.js133054621115354288 0
-93F:\Journey to the mern stack development\forkify project\dist\forkify project.3464ddca.js.map133054619386583630 0
-80F:\Journey to the mern stack development\forkify project\dist\icons.c78699a6.svg133054619385237204 0
-79F:\Journey to the mern stack development\forkify project\dist\index.09c24910.js133054620829170021 0
-79F:\Journey to the mern stack development\forkify project\dist\logo.b82d6c7c.png133054619386493841 0
+89F:\Journey to the mern stack development\forkify project\dist\forkify project.3464ddca.js133054969888811450 0
+93F:\Journey to the mern stack development\forkify project\dist\forkify project.3464ddca.js.map133054969888841380 0
+80F:\Journey to the mern stack development\forkify project\dist\icons.c78699a6.svg133054969888701742 0
+79F:\Journey to the mern stack development\forkify project\dist\index.09c24910.js133054974738890776 0
+79F:\Journey to the mern stack development\forkify project\dist\logo.b82d6c7c.png133054969888821428 0
