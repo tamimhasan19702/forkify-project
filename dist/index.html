@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- title -->
+    <title> Forkify || Search over 1,000,000 recipes </title>
+
+    <!-- google-font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700" rel="stylesheet">
+
+    <!-- favicon -->
+     <link rel="shortcut icon" href="/favicon.c1b29cd4.png" type="image/x-icon"> 
+    
+     <!-- css -->
+    <link rel="stylesheet" href="/index.e8265c92.css">
+    
+    <!-- js -->
+    <script defer="" src="/index.09c24910.js"></script>
+
+</head>
+<body>
+    
+<!-- container -->
+    
+<div class="container">
+
+    <!-- header -->
+
+    <header class="header">
+    
+        <!-- logo -->
+        <img src="/logo.b82d6c7c.png" alt="Logo" class="header-logo">
+        
+        <!-- search-box -->
+        <form action="" class="search">
+            <input type="text" class="search-field" placeholder="Search over 1,000,000 recipes...">
+            <button class="btn search-btn">
+                <svg class="search-icon">
+                  <use href="/icons.c78699a6.svg#icon-search"></use>
+                </svg>
+                <span>Search</span>
+            </button>
+        </form>
+
+       <!-- navigation -->
+       <nav class="nav">
+        <ul class="nav-list">
+            <!-- add recipe -->
+            <li class="nav-item">
+                <button class="nav-btn nav-btn-add-recipe">
+                    <svg class="nav-icon">
+                        <use href="/icons.c78699a6.svg#icon-edit"></use>
+                    </svg>
+                    <span>Add recipe</span>
+                </button>
+            </li>
+           <!--Bookmark  -->
+            <li class="nav-item">
+              <button class="nav-btn nav-btn-bookmark">
+                <svg class="nav-icon">
+                  <use href="/icons.c78699a6.svg#icon-bookmark"></use>
+                </svg>
+                <span>Bookmark</span>
+              </button>
+              <div class="bookmarks">
+                <ul class="bookmarks-list">
+                <div class="message">
+                    <div class="">
+                        <svg>
+                            <use href="/icons.c78699a6.svg#icon-smile%22"></use>
+                          </svg>
+                    </div>
+                    <p>
+                        No bookmark yet. Find a nice recipe and bookmark it 😃 
+                    </p>
+                </div>
+
+                <!-- <li class="preview">
+                   <a href="#23456" class="preview-link">
+                    <figure class="preview-fig"> 
+                    <img src="./img/test-1.jpg" alt="Test">
+                    </figure>
+                    <div class="preview-data">
+                        <h4 class="preview-name">
+                            Pasta with Tomato Cream ..
+                        </h4>
+                     <p class="preview-publisher">
+                        The Pioneer Woman
+                     </p>
+                    </div>
+                   </a>
+                </li> -->
+
+
+                </ul>
+              </div>
+            </li>
+        </ul>
+       </nav>
+
+    </header>
+
+
+   <!-- search results -->
+  <div class="search-results">
+    <ul class="results">
+
+        <!-- <li class="preview">
+            <a href="#23456" class="preview-link preview-link-active">
+                <figure class="preview-fig">
+                    <img src="./img/test-1.jpg" alt="Test">
+                </figure>
+                <div class="preview-data">
+                    <h4 class="preview-title">Pasta with Tomato Cream ... </h4>
+                    <p class="preview-publisher">The Pioneer Woman </p>
+                    <div class="preview-user-generated">
+                        <svg>
+                        <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </li> -->
+
+    </ul>
+
+    <!-- pagination -->
+
+  <div class="pagination">
+    <!-- <button class="btn-inline pagination-btn-prev">
+    <svg class="search-icon">
+     <use href="./img/icons.svg#icon-arrow-left"></use>
+    </svg>
+    <span>Page 1</span>
+    </button>
+    <button class="btn-inline pagination-btn-next">
+      <span>Page 3</span>
+      <svg class="search-icon">
+        <use href="./img/icons.svg#icon-arrow-right"></use>
+      </svg>
+    </button> -->
+  </div>
+
+<!-- copyright -->
+
+  <p class="copyright">
+    © Copyright by 
+    <a href="#">tareq Monower</a>
+    all the information and rights are reserved.
+  </p>
+</div>
+
+<!-- recipe -->
+
+
+<div class="recipe">
+    <div class="message">
+        <div>
+            <svg>
+                <use href="/icons.c78699a6.svg#icon-smile"></use>
+            </svg>
+        </div>
+        <p>Start by searching for a recipe or an ingredient. Have fun!</p>
+    </div>
+
+   <!-- <div class="spinner">
+    <svg>
+        <use href="./img/icons.svg#icon-loader"></use>
+    </svg>
+   </div> -->
+
+   <!-- <div class="error">
+    <div>
+        <svg>
+            <use href="./img/icons.svg#icon-alert-triangle">
+            </use>
+        </svg>
+    </div>
+    <p>No recipes found for your query. Please try again!</p>
+   </div> -->
+
+  <!-- <figure class="recipe-fig">
+    <img src="./img/test-1.jpg" alt="Tomato" class="recipe-img">
+    <h1 class="recipe-title">
+        <span>Pasta with tomato cream sauce</span>
+    </h1>
+  </figure>
+
+   <div class="recipe-details">
+    <div class="recipe-info">
+        <svg class="recipe-info-icon">
+         <use href="./img/icons.svg#icon-clock"></use>
+        </svg>
+        <span class="recipe-info-data recipe-info-data-minutes">45</span>
+        <span class="recipe-info-text">Minutes</span>
+    </div>
+
+     <div class="recipe-info">
+        <svg class="recipe-info-icon">
+          <use href="./img/icons.svg#icon-users"></use>
+        </svg>
+        <span class="recipe-info-data recipe-info-data-people">4</span>
+        <span class="recipe-info-text">Servings</span>
+     
+    <div class="recipe-info-buttons">
+        <button class="btn-tiny btn-increase-servings">
+         <svg>
+            <use href="./img/icons.svg#icon-minus-cirlce"></use>
+         </svg>
+        </button>
+        <button class="btn-tiny btn-increase-servings">
+            <svg>
+                <use href="./img/icons.svg#icon-plus-circle"></use>
+            </svg>
+        </button>
+    </div>
+   </div> -->
+ 
+ <!-- <div class="recipe-user-generated">
+    <svg>
+        <use href="./img/icons.svg#icon-user"></use>
+    </svg>
+ </div>
+ <button class="btn-round">
+    <svg>
+        <use href="./img/icons.svg#icon-bookmark-fill"></use>
+    </svg>
+ </button>
+</div>
+
+<div class="recipe-ingredients">
+    <h2 class="heading-2">Recipe ingredients</h2>
+    <ul class="recipe-ingredient-list">
+        <li class="recipe-ingredient">
+            <svg class="recipe-icon">
+             <use href="./img/icons.svg#icon-check"></use>
+            </svg>
+            <div class="recipe-quantity">1000</div>
+            <div class="recipe-description">
+                <span class="recipe-unit">g</span>
+                Pasta
+            </div>
+        </li>
+
+        <li class="recipe-ingredient">
+        <svg class="recipe-icon">
+        <use href="./img/icons.svg#icon-check"></use>
+        </svg>
+        <div class="recipe-quantity">0.5</div>
+        <div class="recipe-description"> 
+            <span class="recipe-unit">cup</span>
+            ricotta cheese
+        </div>
+        </li>
+    </ul>
+</div>
+
+<div class="recipe-directions">
+    <h2 class="heading-2">How to cook it</h2>
+    <p class="recipe-directions-text">
+        This recipe was carefully designed and tested by 
+        <span class="recipe-publisher">The Pioneer Woman</span>
+     PLease check out directions at their website.
+    </p>
+    <a href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/" class="btn-small recipe-btn" target="blank">
+        <span>Directions</span>
+        <svg class="search-icon">
+            <use href="./img/icons.svg#icon-arrow-right"></use>
+        </svg>
+    </a>
+    </div> -->
+
+</div>
+</div>
+
+<!-- overlay button -->
+
+<div class="overlay hidden"></div>
+<div class="add-recipe-window hidden">
+    <button class="btn-close-modal">&times;</button>
+    <form class="upload">
+       <div class="upload-column">
+        <h3 class="upload-heading">Recipe data</h3>
+        <label for="">Title</label>
+        <input type="text" value="test" required="" name="title">
+        <label for="">URL</label>
+        <input type="text" value="test" required="" name="sourceUrl">
+        <label for="">Image URL</label>
+        <input type="text" value="test" required="" name="image">
+        <label for="">Publisher</label>
+        <input type="text" value="test" required="" name="publisher">
+        <label for="">Prep time</label>
+        <input type="number" value="23" required="" name="cookingTime">
+        <label for="">Servings</label>
+        <input type="number" required="" name="servings" value="23">
+       </div>
+
+     <div class="upload-column">
+        <h3 class="upload-heading">Ingredients</h3>
+        <label for="">Ingredient 1</label>
+        <input value="0.5,kg,Rice" type="text" required="" name="Ingredient-1" placeholder="Format: 'Quantity,Unit,Description">
+        <label for="">Ingredient 2</label>
+        <input value="1,Avocado" type="text" name="Ingredient-2" placeholder="Format: 'Quantity,Unit,Description">
+        <label for="">Ingredient 3</label>
+        <input value=",,salt" type="text" name="Ingredient-3" placeholder="Format: 'Quantity,Unit,Description">
+        <label for="">Ingredient 4</label>
+        <input type="text" name="Ingredient-4" placeholder="Format: 'Quantity,Unit,Description">
+        <label for="">Ingredient 5</label>
+        <input type="text" name="Ingredient-5" placeholder="Format: 'Quantity,Unit,Description">
+        <label for="">Ingredient 6</label>
+        <input type="text" name="Ingredient-6" placeholder="Format: 'Quantity,Unit,Description">
+     </div>
+
+     <button class="btn upload-btn">
+       <svg>
+        <use href="/icons.c78699a6.svg#icon-upload-cloud"></use>
+       </svg>
+       <span>Upload</span>
+     </button>
+    </form>
+</div>
+
+
+    
+<script src="/forkify%20project.3464ddca.js"></script></body>
+</html>

@@ -2,7 +2,7 @@
   "name": "forkify-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
@@ -10,7 +10,8 @@
   "author": "tareq",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
     "parcel": "^2.7.0",
-    "sass": "^1.26.10"
+    "sass": "^1.54.5"
   }
 }
