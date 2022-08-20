@@ -2,13 +2,15 @@
   "name": "forkify-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "sass": "sass --watch scss/style.scss:css/style.css"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "tareq",
   "license": "ISC",
-  "dependencies": {
-    "node-sass": "^7.0.1"
+  "devDependencies": {
+    "parcel": "^2.7.0",
+    "sass": "^1.26.10"
   }
 }
