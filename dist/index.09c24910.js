@@ -92,7 +92,7 @@ const showRecipe = async function() {
             </div>
         </li>
       `;
-        })}
+        }).join("")}
      
     </ul>
 </div>
@@ -112,6 +112,7 @@ const showRecipe = async function() {
     </a>
     </div> 
     `;
+        console.log(recipe);
         recipeContainer.innerHTML = "";
         recipeContainer.insertAdjacentHTML("afterbegin", markUp);
     } catch (err) {
