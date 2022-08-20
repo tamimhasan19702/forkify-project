@@ -34,9 +34,9 @@ body {
   min-height: 117rem;
   background-color: #fff;
   border-radius: 9px;
-  grid-template-columns: 1fr 2fr;
-  grid-template-areas: "head head"
-                       "list recipe";
+  grid-template: "head head" 10rem
+                 "list recipe" minmax(100rem, auto)
+                 / 1fr 2fr;
   margin: 4vw auto;
   display: grid;
   overflow: hidden;
@@ -251,8 +251,6 @@ body {
 }
 
 .header {
-  width: 100%;
-  height: 10rem;
   background-color: #f9f5f3;
   grid-area: head;
   justify-content: space-between;
@@ -488,7 +486,6 @@ body {
 }
 
 .recipe {
-  height: 107rem;
   background-color: #f9f5f3;
 }
 
@@ -651,7 +648,6 @@ body {
 }
 
 .search-results {
-  height: 107rem;
   flex-direction: column;
   padding: 3rem 0;
   display: flex;
