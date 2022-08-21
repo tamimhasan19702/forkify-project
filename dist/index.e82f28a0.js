@@ -2373,7 +2373,7 @@ class recipeView {
                 <svg class="recipe-icon">
                  <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
                 </svg>
-                <div class="recipe-quantity">${new (0, _fractional.Fraction)(ing.quantity).toString()}</div>
+                <div class="recipe-quantity">${ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : ""}</div>
                 <div class="recipe-description">
                     <span class="recipe-unit">${ing.unit}</span>
                     ${ing.description}
