@@ -5,7 +5,7 @@ import { Fraction } from 'fractional';
 // recipeView class
 class recipeView {
     #primaryContainer = document.querySelector('.recipe');
-    
+
     #data;
 
     render(data){

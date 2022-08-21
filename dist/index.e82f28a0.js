@@ -541,14 +541,6 @@ var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 const recipeContainer = document.querySelector(".recipe");
 // ================================================
-const timeout = function(s) {
-    return new Promise(function(_, reject) {
-        setTimeout(function() {
-            reject(new Error(`Request Took to long to load! Timeout after ${s} second`));
-        }, s * 1000);
-    });
-};
-// ================================================
 // recipe showcase
 const controlRecipes = async function() {
     try {
@@ -2288,7 +2280,7 @@ const loadRecipe = async function(id) {
         };
         console.log(state.recipe);
     } catch (err) {
-        alert(err);
+        console.error(err);
     }
 };
 
@@ -2302,14 +2294,25 @@ const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
+// ================================================
+const timeout = function(s) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error(`Request Took to long to load! Timeout after ${s} second`));
+        }, s * 1000);
+    });
+};
 const getJSON = async function(url) {
     try {
-        const res = await fetch(url);
+        const res = await Promise.race([
+            fetch(url),
+            timeout(10)
+        ]);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status})`);
         return data;
     } catch (err) {
-        console.log(err);
+        throw err;
     }
 };
 
