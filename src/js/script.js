@@ -8,8 +8,6 @@ import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
 
-
-
 // ================================================
 
 
@@ -24,11 +22,11 @@ const timeout = function(s){
 // ================================================
 
 // recipe showcase
-const controlRecipies = async function(){
+const controlRecipes = async function(){
     try{
-
      const id = window.location.hash.slice(1);
      if(!id) return;
+
     //  spinner
      recipeView.renderSpinner()
      
@@ -45,4 +43,4 @@ const controlRecipies = async function(){
     }
 };
 
-['hashchange','load'].forEach(ev => window.addEventListener(ev, controlRecipies))
+['hashchange','load'].forEach(ev => window.addEventListener(ev, controlRecipes))

@@ -5,6 +5,7 @@ import { Fraction } from 'fractional';
 // recipeView class
 class recipeView {
     #primaryContainer = document.querySelector('.recipe');
+    
     #data;
 
     render(data){
@@ -73,20 +74,7 @@ class recipeView {
         <h2 class="heading-2">Recipe ingredients</h2>
         <ul class="recipe-ingredient-list">
            
-        ${this.#data.ingredients.map(ing => {
-          return `
-          <li class="recipe-ingredient">
-                <svg class="recipe-icon">
-                 <use href="${icons}#icon-check"></use>
-                </svg>
-                <div class="recipe-quantity">${ ing.quantity ? new Fraction(ing.quantity).toString() : ''}</div>
-                <div class="recipe-description">
-                    <span class="recipe-unit">${ing.unit}</span>
-                    ${ing.description}
-                </div>
-            </li>
-          `
-        }).join('')}
+        ${this.#data.ingredients.map(this.#generateMarkupIngredients).join('')}
          
         </ul>
     </div>
@@ -106,6 +94,21 @@ class recipeView {
         </a>
         </div> 
         `
+    }
+
+    #generateMarkupIngredients (ing) {
+            return `
+            <li class="recipe-ingredient">
+                  <svg class="recipe-icon">
+                   <use href="${icons}#icon-check"></use>
+                  </svg>
+                  <div class="recipe-quantity">${ ing.quantity ? new Fraction(ing.quantity).toString() : ''}</div>
+                  <div class="recipe-description">
+                      <span class="recipe-unit">${ing.unit}</span>
+                      ${ing.description}
+                  </div>
+              </li>
+            `
     }
 
     renderSpinner(){

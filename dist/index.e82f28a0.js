@@ -550,7 +550,7 @@ const timeout = function(s) {
 };
 // ================================================
 // recipe showcase
-const controlRecipies = async function() {
+const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
         if (!id) return;
@@ -567,7 +567,7 @@ const controlRecipies = async function() {
 [
     "hashchange",
     "load"
-].forEach((ev)=>window.addEventListener(ev, controlRecipies));
+].forEach((ev)=>window.addEventListener(ev, controlRecipes));
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -2267,12 +2267,13 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 var _regeneratorRuntime = require("regenerator-runtime");
+var _configJs = require("./config.js");
 const state = {
     recipe: {}
 };
 const loadRecipe = async function(id) {
     try {
-        const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
+        const res = await fetch(`${(0, _configJs.API_URL)}/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status})`);
         const { recipe  } = data.data;
@@ -2292,7 +2293,13 @@ const loadRecipe = async function(id) {
     }
 };
 
-},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","regenerator-runtime":"dXNgZ"}],"k5Hzs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // importing necessary values
@@ -2367,20 +2374,7 @@ class recipeView {
         <h2 class="heading-2">Recipe ingredients</h2>
         <ul class="recipe-ingredient-list">
            
-        ${this.#data.ingredients.map((ing)=>{
-            return `
-          <li class="recipe-ingredient">
-                <svg class="recipe-icon">
-                 <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
-                </svg>
-                <div class="recipe-quantity">${ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : ""}</div>
-                <div class="recipe-description">
-                    <span class="recipe-unit">${ing.unit}</span>
-                    ${ing.description}
-                </div>
-            </li>
-          `;
-        }).join("")}
+        ${this.#data.ingredients.map(this.#generateMarkupIngredients).join("")}
          
         </ul>
     </div>
@@ -2400,6 +2394,20 @@ class recipeView {
         </a>
         </div> 
         `;
+    }
+     #generateMarkupIngredients(ing) {
+        return `
+            <li class="recipe-ingredient">
+                  <svg class="recipe-icon">
+                   <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
+                  </svg>
+                  <div class="recipe-quantity">${ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : ""}</div>
+                  <div class="recipe-description">
+                      <span class="recipe-unit">${ing.unit}</span>
+                      ${ing.description}
+                  </div>
+              </li>
+            `;
     }
     renderSpinner() {
         const markUp = `
