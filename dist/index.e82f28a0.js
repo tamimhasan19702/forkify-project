@@ -556,12 +556,12 @@ const controlRecipes = async function() {
         alert(err);
     }
 };
-[
-    "hashchange",
-    "load"
-].forEach((ev)=>window.addEventListener(ev, controlRecipes));
+const init = ()=>{
+    (0, _recipeViewJsDefault.default).addRecipeHandler(controlRecipes);
+};
+init();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -1686,7 +1686,38 @@ $({
     setImmediate: setImmediate
 });
 
-},{"../internals/export":"dIGt4","../internals/global":"i8HOC","../internals/task":"7jDg7"}],"dXNgZ":[function(require,module,exports) {
+},{"../internals/export":"dIGt4","../internals/global":"i8HOC","../internals/task":"7jDg7"}],"Y4A21":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state);
+parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
+var _regeneratorRuntime = require("regenerator-runtime");
+var _configJs = require("./config.js");
+var _helperJs = require("./helper.js");
+const state = {
+    recipe: {}
+};
+const loadRecipe = async function(id) {
+    try {
+        const data = await (0, _helperJs.getJSON)(`${(0, _configJs.API_URL)}/${id}`);
+        const { recipe  } = data.data;
+        state.recipe = {
+            id: recipe.id,
+            title: recipe.title,
+            publisher: recipe.publisher,
+            sourceUrl: recipe.source_url,
+            image: recipe.image_url,
+            servings: recipe.servings,
+            cookingTime: recipe.cooking_time,
+            ingredients: recipe.ingredients
+        };
+        console.log(state.recipe);
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+},{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -2253,38 +2284,7 @@ try {
     else Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"Y4A21":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "state", ()=>state);
-parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
-var _regeneratorRuntime = require("regenerator-runtime");
-var _configJs = require("./config.js");
-var _helperJs = require("./helper.js");
-const state = {
-    recipe: {}
-};
-const loadRecipe = async function(id) {
-    try {
-        const data = await (0, _helperJs.getJSON)(`${(0, _configJs.API_URL)}/${id}`);
-        const { recipe  } = data.data;
-        state.recipe = {
-            id: recipe.id,
-            title: recipe.title,
-            publisher: recipe.publisher,
-            sourceUrl: recipe.source_url,
-            image: recipe.image_url,
-            servings: recipe.servings,
-            cookingTime: recipe.cooking_time,
-            ingredients: recipe.ingredients
-        };
-        console.log(state.recipe);
-    } catch (err) {
-        console.error(err);
-    }
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","regenerator-runtime":"dXNgZ","./helper.js":"lVRAz"}],"k5Hzs":[function(require,module,exports) {
+},{}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -2293,7 +2293,7 @@ var _regeneratorRuntime = require("regenerator-runtime");
 const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
 const TIMEOUT_SEC = 10;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ"}],"lVRAz":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lVRAz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
@@ -2321,7 +2321,7 @@ const getJSON = async function(url) {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ","./config":"k5Hzs"}],"l60JC":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // importing necessary values
@@ -2443,10 +2443,16 @@ class recipeView {
         this.#primaryContainer.innerHTML = "";
         this.#primaryContainer.insertAdjacentHTML("afterbegin", markUp);
     }
+    addRecipeHandler(handler) {
+        [
+            "hashchange",
+            "load"
+        ].forEach((ev)=>window.addEventListener(ev, handler));
+    }
 }
 exports.default = new recipeView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../../../img/icons.svg":"8LrKW","fractional":"3SU56","regenerator-runtime":"dXNgZ"}],"8LrKW":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","url:../../../img/icons.svg":"8LrKW","fractional":"3SU56","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8LrKW":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("2MSMO") + "icons.a23457cd.svg" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
