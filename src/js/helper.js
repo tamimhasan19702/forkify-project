@@ -1,6 +1,7 @@
 import { async } from "regenerator-runtime";
 import { TIMEOUT_SEC } from "./config";
-// ================================================
+
+// render recipe
 
 const timeout = function(s){
     return new Promise (function(_,reject){
@@ -21,3 +22,4 @@ export const getJSON = async function (url ){
         throw err;
     }
 }
+

@@ -8,7 +8,7 @@ class recipeView {
     #primaryContainer = document.querySelector('.recipe');
     #data;
     #errorMessage = `Sorry, We couldn't find that recipe. Please try another one !!`;
-    #message = ``
+    #message = ``;
 
     render(data){
         this.#data = data;

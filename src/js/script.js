@@ -34,3 +34,14 @@ const init = () => {
     recipeView.addRecipeHandler(controlRecipes)
 }
 init()
+
+// search functionality
+
+const controlSearchResults = async function(){
+  try{
+  await model.loadSearchResults('pizza');
+  console.log(model.state.search.results);
+  }catch(err){
+    console.log(err)
+  }
+}
