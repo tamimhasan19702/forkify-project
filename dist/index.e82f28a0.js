@@ -539,6 +539,8 @@ var _modelJs = require("./model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 var _runtime = require("regenerator-runtime/runtime");
+var _searchViewJs = require("./views/searchView.js");
+var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 const recipeContainer = document.querySelector(".recipe");
 // ================================================
 // recipe showcase
@@ -556,21 +558,25 @@ const controlRecipes = async function() {
         (0, _recipeViewJsDefault.default).renderError();
     }
 };
-const init = ()=>{
-    (0, _recipeViewJsDefault.default).addRecipeHandler(controlRecipes);
-};
-init();
 // search functionality
 const controlSearchResults = async function() {
     try {
-        await _modelJs.loadSearchResults("pizza");
+        const query = (0, _searchViewJsDefault.default).getQuery();
+        if (!query) return;
+        await _modelJs.loadSearchResults(query);
         console.log(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
     }
 };
+// event handeling
+const init = ()=>{
+    (0, _recipeViewJsDefault.default).addRecipeHandler(controlRecipes);
+    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
+};
+init();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","./views/searchView.js":"9OQAM"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -1725,7 +1731,6 @@ const loadRecipe = async function(id) {
             cookingTime: recipe.cooking_time,
             ingredients: recipe.ingredients
         };
-        console.log(state.recipe);
     } catch (err) {
         console.error(err);
         throw err;
@@ -1735,7 +1740,6 @@ const loadSearchResults = async function(query) {
     try {
         state.search.query = query;
         const data = await (0, _helperJs.getJSON)(`${(0, _configJs.API_URL)}?search=${query}`);
-        console.log(data);
         state.search.results = data.data.recipes.map((rec)=>{
             return {
                 id: rec.id,
@@ -1744,6 +1748,7 @@ const loadSearchResults = async function(query) {
                 image: rec.image_url
             };
         });
+        console.log(state.search.results);
     } catch (err) {
         console.log(err);
         throw err;
@@ -2807,6 +2812,24 @@ Fraction.primeFactors = function(n) {
 };
 module.exports.Fraction = Fraction;
 
-},{}]},["eZyLq","dV6cC"], "dV6cC", "parcelRequire6c34")
+},{}],"9OQAM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class SearchView {
+    #parentEl = document.querySelector(".search");
+    getQuery() {
+        return this.#parentEl.querySelector(".search-field").value;
+    }
+    clearInp;
+    addHandlerSearch(handler) {
+        this.#parentEl.addEventListener("submit", function(e) {
+            e.preventDefault();
+            handler();
+        });
+    }
+}
+exports.default = new SearchView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["eZyLq","dV6cC"], "dV6cC", "parcelRequire6c34")
 
 //# sourceMappingURL=index.e82f28a0.js.map
