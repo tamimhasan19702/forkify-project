@@ -532,6 +532,15 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"dV6cC":[function(require,module,exports) {
+const recipeContainer = document.querySelector("./recipe");
+const timeout = function(s) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error(`Request took too long! Timeout after ${s} second`));
+        }, s * 1000);
+    });
+}; //api - https://forkify-api.herokuapp.com/v2
+ //////////////////////////////////////////
 
 },{}]},["eZyLq","dV6cC"], "dV6cC", "parcelRequire6c34")
 
