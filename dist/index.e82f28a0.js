@@ -579,37 +579,7 @@ const init = ()=>{
 };
 init();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","./views/searchView.js":"9OQAM"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./model.js":"Y4A21","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","./views/searchView.js":"9OQAM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("../modules/web.clear-immediate");
 require("../modules/web.set-immediate");
@@ -821,12 +791,20 @@ module.exports = function(it) {
 };
 
 },{"../internals/function-uncurry-this":"7GlkT"}],"fOR0B":[function(require,module,exports) {
+var isNullOrUndefined = require("../internals/is-null-or-undefined");
 var $TypeError = TypeError;
 // `RequireObjectCoercible` abstract operation
 // https://tc39.es/ecma262/#sec-requireobjectcoercible
 module.exports = function(it) {
-    if (it == undefined) throw $TypeError("Can't call method on " + it);
+    if (isNullOrUndefined(it)) throw $TypeError("Can't call method on " + it);
     return it;
+};
+
+},{"../internals/is-null-or-undefined":"gM5ar"}],"gM5ar":[function(require,module,exports) {
+// we can't use just `it == null` since of `document.all` special case
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot-aec
+module.exports = function(it) {
+    return it === null || it === undefined;
 };
 
 },{}],"5XWKd":[function(require,module,exports) {
@@ -866,15 +844,32 @@ module.exports = function(input, pref) {
 
 },{"../internals/function-call":"d7JlP","../internals/is-object":"Z0pBo","../internals/is-symbol":"4aV4F","../internals/get-method":"9Zfiw","../internals/ordinary-to-primitive":"7MME2","../internals/well-known-symbol":"gTwyA"}],"Z0pBo":[function(require,module,exports) {
 var isCallable = require("../internals/is-callable");
-module.exports = function(it) {
+var $documentAll = require("../internals/document-all");
+var documentAll = $documentAll.all;
+module.exports = $documentAll.IS_HTMLDDA ? function(it) {
+    return typeof it == "object" ? it !== null : isCallable(it) || it === documentAll;
+} : function(it) {
     return typeof it == "object" ? it !== null : isCallable(it);
 };
 
-},{"../internals/is-callable":"l3Kyn"}],"l3Kyn":[function(require,module,exports) {
+},{"../internals/is-callable":"l3Kyn","../internals/document-all":"5MHqB"}],"l3Kyn":[function(require,module,exports) {
+var $documentAll = require("../internals/document-all");
+var documentAll = $documentAll.all;
 // `IsCallable` abstract operation
 // https://tc39.es/ecma262/#sec-iscallable
-module.exports = function(argument) {
+module.exports = $documentAll.IS_HTMLDDA ? function(argument) {
+    return typeof argument == "function" || argument === documentAll;
+} : function(argument) {
     return typeof argument == "function";
+};
+
+},{"../internals/document-all":"5MHqB"}],"5MHqB":[function(require,module,exports) {
+var documentAll = typeof document == "object" && document.all;
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
+var IS_HTMLDDA = typeof documentAll == "undefined" && documentAll !== undefined;
+module.exports = {
+    all: documentAll,
+    IS_HTMLDDA: IS_HTMLDDA
 };
 
 },{}],"4aV4F":[function(require,module,exports) {
@@ -905,10 +900,10 @@ var uncurryThis = require("../internals/function-uncurry-this");
 module.exports = uncurryThis({}.isPrototypeOf);
 
 },{"../internals/function-uncurry-this":"7GlkT"}],"2Ye8Q":[function(require,module,exports) {
-/* eslint-disable es-x/no-symbol -- required for testing */ var NATIVE_SYMBOL = require("../internals/native-symbol");
+/* eslint-disable es-x/no-symbol -- required for testing */ var NATIVE_SYMBOL = require("../internals/symbol-constructor-detection");
 module.exports = NATIVE_SYMBOL && !Symbol.sham && typeof Symbol.iterator == "symbol";
 
-},{"../internals/native-symbol":"grUXC"}],"grUXC":[function(require,module,exports) {
+},{"../internals/symbol-constructor-detection":"8KyTD"}],"8KyTD":[function(require,module,exports) {
 /* eslint-disable es-x/no-symbol -- required for testing */ var V8_VERSION = require("../internals/engine-v8-version");
 var fails = require("../internals/fails");
 // eslint-disable-next-line es-x/no-object-getownpropertysymbols -- required for testing
@@ -951,14 +946,15 @@ module.exports = getBuiltIn("navigator", "userAgent") || "";
 
 },{"../internals/get-built-in":"6ZUSY"}],"9Zfiw":[function(require,module,exports) {
 var aCallable = require("../internals/a-callable");
+var isNullOrUndefined = require("../internals/is-null-or-undefined");
 // `GetMethod` abstract operation
 // https://tc39.es/ecma262/#sec-getmethod
 module.exports = function(V, P) {
     var func = V[P];
-    return func == null ? undefined : aCallable(func);
+    return isNullOrUndefined(func) ? undefined : aCallable(func);
 };
 
-},{"../internals/a-callable":"gOMir"}],"gOMir":[function(require,module,exports) {
+},{"../internals/a-callable":"gOMir","../internals/is-null-or-undefined":"gM5ar"}],"gOMir":[function(require,module,exports) {
 var isCallable = require("../internals/is-callable");
 var tryToString = require("../internals/try-to-string");
 var $TypeError = TypeError;
@@ -998,7 +994,7 @@ var global = require("../internals/global");
 var shared = require("../internals/shared");
 var hasOwn = require("../internals/has-own-property");
 var uid = require("../internals/uid");
-var NATIVE_SYMBOL = require("../internals/native-symbol");
+var NATIVE_SYMBOL = require("../internals/symbol-constructor-detection");
 var USE_SYMBOL_AS_UID = require("../internals/use-symbol-as-uid");
 var WellKnownSymbolsStore = shared("wks");
 var Symbol = global.Symbol;
@@ -1014,16 +1010,16 @@ module.exports = function(name) {
     return WellKnownSymbolsStore[name];
 };
 
-},{"../internals/global":"i8HOC","../internals/shared":"i1mHK","../internals/has-own-property":"gC2Q5","../internals/uid":"a3SEE","../internals/native-symbol":"grUXC","../internals/use-symbol-as-uid":"2Ye8Q"}],"i1mHK":[function(require,module,exports) {
+},{"../internals/global":"i8HOC","../internals/shared":"i1mHK","../internals/has-own-property":"gC2Q5","../internals/uid":"a3SEE","../internals/symbol-constructor-detection":"8KyTD","../internals/use-symbol-as-uid":"2Ye8Q"}],"i1mHK":[function(require,module,exports) {
 var IS_PURE = require("../internals/is-pure");
 var store = require("../internals/shared-store");
 (module.exports = function(key, value) {
     return store[key] || (store[key] = value !== undefined ? value : {});
 })("versions", []).push({
-    version: "3.24.1",
+    version: "3.25.2",
     mode: IS_PURE ? "pure" : "global",
     copyright: "\xa9 2014-2022 Denis Pushkarev (zloirock.ru)",
-    license: "https://github.com/zloirock/core-js/blob/v3.24.1/LICENSE",
+    license: "https://github.com/zloirock/core-js/blob/v3.25.2/LICENSE",
     source: "https://github.com/zloirock/core-js"
 });
 
@@ -1291,7 +1287,7 @@ if (!isCallable(store.inspectSource)) store.inspectSource = function(it) {
 module.exports = store.inspectSource;
 
 },{"../internals/function-uncurry-this":"7GlkT","../internals/is-callable":"l3Kyn","../internals/shared-store":"l4ncH"}],"7AMlF":[function(require,module,exports) {
-var NATIVE_WEAK_MAP = require("../internals/native-weak-map");
+var NATIVE_WEAK_MAP = require("../internals/weak-map-basic-detection");
 var global = require("../internals/global");
 var uncurryThis = require("../internals/function-uncurry-this");
 var isObject = require("../internals/is-object");
@@ -1320,7 +1316,7 @@ if (NATIVE_WEAK_MAP || shared.state) {
     var wmhas = uncurryThis(store.has);
     var wmset = uncurryThis(store.set);
     set = function(it, metadata) {
-        if (wmhas(store, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
+        if (wmhas(store, it)) throw TypeError(OBJECT_ALREADY_INITIALIZED);
         metadata.facade = it;
         wmset(store, it, metadata);
         return metadata;
@@ -1335,7 +1331,7 @@ if (NATIVE_WEAK_MAP || shared.state) {
     var STATE = sharedKey("state");
     hiddenKeys[STATE] = true;
     set = function(it, metadata) {
-        if (hasOwn(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
+        if (hasOwn(it, STATE)) throw TypeError(OBJECT_ALREADY_INITIALIZED);
         metadata.facade = it;
         createNonEnumerableProperty(it, STATE, metadata);
         return metadata;
@@ -1355,14 +1351,13 @@ module.exports = {
     getterFor: getterFor
 };
 
-},{"../internals/native-weak-map":"7LdJl","../internals/global":"i8HOC","../internals/function-uncurry-this":"7GlkT","../internals/is-object":"Z0pBo","../internals/create-non-enumerable-property":"8CL42","../internals/has-own-property":"gC2Q5","../internals/shared-store":"l4ncH","../internals/shared-key":"eAjGz","../internals/hidden-keys":"661m4"}],"7LdJl":[function(require,module,exports) {
+},{"../internals/weak-map-basic-detection":"2PZTl","../internals/global":"i8HOC","../internals/function-uncurry-this":"7GlkT","../internals/is-object":"Z0pBo","../internals/create-non-enumerable-property":"8CL42","../internals/has-own-property":"gC2Q5","../internals/shared-store":"l4ncH","../internals/shared-key":"eAjGz","../internals/hidden-keys":"661m4"}],"2PZTl":[function(require,module,exports) {
 var global = require("../internals/global");
 var isCallable = require("../internals/is-callable");
-var inspectSource = require("../internals/inspect-source");
 var WeakMap = global.WeakMap;
-module.exports = isCallable(WeakMap) && /native code/.test(inspectSource(WeakMap));
+module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
 
-},{"../internals/global":"i8HOC","../internals/is-callable":"l3Kyn","../internals/inspect-source":"9jh7O"}],"eAjGz":[function(require,module,exports) {
+},{"../internals/global":"i8HOC","../internals/is-callable":"l3Kyn"}],"eAjGz":[function(require,module,exports) {
 var shared = require("../internals/shared");
 var uid = require("../internals/uid");
 var keys = shared("keys");
@@ -2334,7 +2329,37 @@ var _regeneratorRuntime = require("regenerator-runtime");
 const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
 const TIMEOUT_SEC = 10;
 
-},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lVRAz":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"lVRAz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
@@ -2835,6 +2860,7 @@ class SearchView {
         });
     }
 }
+// export default new SearchView();
 exports.default = new SearchView();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["eZyLq","dV6cC"], "dV6cC", "parcelRequire6c34")

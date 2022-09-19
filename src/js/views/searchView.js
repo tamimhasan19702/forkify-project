@@ -19,4 +19,6 @@ class SearchView{
   }
 }
 
+// export default new SearchView();
+
 export default new SearchView();

@@ -1,21 +1,28 @@
 {
   "name": "forkify-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hi this is Tareq here. currently learning javascript from @jonasschmedtman.",
   "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamimhasan19702/forkify-project.git"
+  },
   "author": "tareq",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tamimhasan19702/forkify-project/issues"
+  },
+  "homepage": "https://github.com/tamimhasan19702/forkify-project#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
-    "parcel": "^2.7.0",
-    "sass": "^1.54.5"
+    "parcel": "^2.7.0"
   },
   "dependencies": {
-    "core-js": "^3.24.1",
+    "core-js": "^3.25.2",
     "fractional": "^1.0.0",
     "regenerator-runtime": "^0.13.9"
   }
