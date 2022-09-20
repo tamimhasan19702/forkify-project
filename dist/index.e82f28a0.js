@@ -532,6 +532,10 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"dV6cC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _iconsSvg = require("url:../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+console.log((0, _iconsSvgDefault.default));
 const recipeContainer = document.querySelector(".recipe");
 const timeout = function(s) {
     return new Promise(function(_, reject) {
@@ -542,9 +546,21 @@ const timeout = function(s) {
 };
 //api - https://forkify-api.herokuapp.com/v2
 //////////////////////////////////////////
+const renderSpinner = function(parentEl) {
+    const markUp = `
+  <div class="spinner">
+    <svg>
+        <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
+    </svg>
+   </div>
+  `;
+    parentEl.innerHTML = "";
+    parentEl.insertAdjacentHTML("afterbegin", markUp);
+};
 const showRecipe = async function() {
     try {
         //loading recipe
+        renderSpinner(recipeContainer);
         const res = await fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcd07");
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status})`);
@@ -572,7 +588,7 @@ const showRecipe = async function() {
 <div class="recipe-details">
 <div class="recipe-info">
     <svg class="recipe-info-icon">
-     <use href="./img/icons.svg#icon-clock"></use>
+     <use href="${(0, _iconsSvgDefault.default)}#icon-clock"></use>
     </svg>
     <span class="recipe-info-data recipe-info-data-minutes">${recipe.cookingTime}</span>
     <span class="recipe-info-text">Minutes</span>
@@ -580,7 +596,7 @@ const showRecipe = async function() {
 
  <div class="recipe-info">
     <svg class="recipe-info-icon">
-      <use href="./img/icons.svg#icon-users"></use>
+      <use href="${(0, _iconsSvgDefault.default)}#icon-users"></use>
     </svg>
     <span class="recipe-info-data recipe-info-data-people">${recipe.servings}</span>
     <span class="recipe-info-text">Servings</span>
@@ -588,12 +604,12 @@ const showRecipe = async function() {
 <div class="recipe-info-buttons">
     <button class="btn-tiny btn-increase-servings">
      <svg>
-        <use href="./img/icons.svg#icon-minus-circle"></use>
+        <use href="${(0, _iconsSvgDefault.default)}#icon-minus-circle"></use>
      </svg>
     </button>
     <button class="btn-tiny btn-increase-servings">
         <svg>
-            <use href="./img/icons.svg#icon-plus-circle"></use>
+            <use href="${(0, _iconsSvgDefault.default)}#icon-plus-circle"></use>
         </svg>
     </button>
 </div>
@@ -601,12 +617,12 @@ const showRecipe = async function() {
 
  <div class="recipe-user-generated">
 <svg>
-    <use href="./img/icons.svg#icon-user"></use>
+    <use href="${(0, _iconsSvgDefault.default)}#icon-user"></use>
 </svg>
 </div>
 <button class="btn-round">
 <svg>
-    <use href="./img/icons.svg#icon-bookmark-fill"></use>
+    <use href="${(0, _iconsSvgDefault.default)}#icon-bookmark-fill"></use>
 </svg>
 </button>
 </div>
@@ -619,7 +635,7 @@ ${recipe.ingredients.map((ing)=>{
             return `
   <li class="recipe-ingredient">
         <svg class="recipe-icon">
-         <use href="./img/icons.svg#icon-check"></use>
+         <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
         </svg>
         <div class="recipe-quantity">${ing.quantity}</div>
         <div class="recipe-description">
@@ -655,6 +671,73 @@ ${recipe.ingredients.map((ing)=>{
     }
 };
 showRecipe();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../../img/icons.svg":"8LrKW"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"8LrKW":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("2MSMO") + "icons.a23457cd.svg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
 
 },{}]},["eZyLq","dV6cC"], "dV6cC", "parcelRequire6c34")
 

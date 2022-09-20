@@ -1,3 +1,6 @@
+import icons from 'url:../../img/icons.svg';
+console.log(icons);
+
 const recipeContainer = document.querySelector('.recipe');
 
  const timeout = function(s){
@@ -13,9 +16,23 @@ const recipeContainer = document.querySelector('.recipe');
 
  //////////////////////////////////////////
 
+const renderSpinner = function(parentEl){
+  const markUp = `
+  <div class="spinner">
+    <svg>
+        <use href="${icons}#icon-loader"></use>
+    </svg>
+   </div>
+  `
+  parentEl.innerHTML = '';
+  parentEl.insertAdjacentHTML('afterbegin',markUp);
+}
+
+
 const showRecipe = async function(){
 try{
   //loading recipe
+renderSpinner(recipeContainer);  
 const res = await fetch(
   'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcd07'
 )
@@ -49,7 +66,7 @@ const markUp = `
 <div class="recipe-details">
 <div class="recipe-info">
     <svg class="recipe-info-icon">
-     <use href="./img/icons.svg#icon-clock"></use>
+     <use href="${icons}#icon-clock"></use>
     </svg>
     <span class="recipe-info-data recipe-info-data-minutes">${recipe.cookingTime}</span>
     <span class="recipe-info-text">Minutes</span>
@@ -57,7 +74,7 @@ const markUp = `
 
  <div class="recipe-info">
     <svg class="recipe-info-icon">
-      <use href="./img/icons.svg#icon-users"></use>
+      <use href="${icons}#icon-users"></use>
     </svg>
     <span class="recipe-info-data recipe-info-data-people">${recipe.servings}</span>
     <span class="recipe-info-text">Servings</span>
@@ -65,12 +82,12 @@ const markUp = `
 <div class="recipe-info-buttons">
     <button class="btn-tiny btn-increase-servings">
      <svg>
-        <use href="./img/icons.svg#icon-minus-circle"></use>
+        <use href="${icons}#icon-minus-circle"></use>
      </svg>
     </button>
     <button class="btn-tiny btn-increase-servings">
         <svg>
-            <use href="./img/icons.svg#icon-plus-circle"></use>
+            <use href="${icons}#icon-plus-circle"></use>
         </svg>
     </button>
 </div>
@@ -78,12 +95,12 @@ const markUp = `
 
  <div class="recipe-user-generated">
 <svg>
-    <use href="./img/icons.svg#icon-user"></use>
+    <use href="${icons}#icon-user"></use>
 </svg>
 </div>
 <button class="btn-round">
 <svg>
-    <use href="./img/icons.svg#icon-bookmark-fill"></use>
+    <use href="${icons}#icon-bookmark-fill"></use>
 </svg>
 </button>
 </div>
@@ -96,7 +113,7 @@ ${recipe.ingredients.map( ing => {
   return `
   <li class="recipe-ingredient">
         <svg class="recipe-icon">
-         <use href="./img/icons.svg#icon-check"></use>
+         <use href="${icons}#icon-check"></use>
         </svg>
         <div class="recipe-quantity">${ing.quantity}</div>
         <div class="recipe-description">
