@@ -1,5 +1,6 @@
 //icons
 import icons from '../../../img/icons.svg';
+import { Fraction } from 'fractional';
 class recipeView {
     _parentElement = document.querySelector('.recipe');
     _data;
@@ -70,20 +71,7 @@ class recipeView {
  <h2 class="heading-2">Recipe ingredients</h2>
  <ul class="recipe-ingredient-list">
 
-${this._data.ingredients.map( ing => {
-  return `
-  <li class="recipe-ingredient">
-        <svg class="recipe-icon">
-         <use href="${icons}#icon-check"></use>
-        </svg>
-        <div class="recipe-quantity">${ing.quantity}</div>
-        <div class="recipe-description">
-            <span class="recipe-unit">${ing.unit}</span>
-            ${ing.description}
-        </div>
-    </li>
-  `
-}).join('')}
+${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
     
 </ul>
 </div>
@@ -115,6 +103,21 @@ ${this._data.ingredients.map( ing => {
         `
         this._parentElement.innerHTML = '';
         this._parentElement.insertAdjacentHTML('afterbegin',markUp);
+      }
+
+      _generateMarkUpGradient(ing) {
+        return `
+        <li class="recipe-ingredient">
+              <svg class="recipe-icon">
+               <use href="${icons}#icon-check"></use>
+              </svg>
+              <div class="recipe-quantity">${ ing.quantity ? new Fraction(ing.quantity).toString() : '' }</div>
+              <div class="recipe-description">
+                  <span class="recipe-unit">${ing.unit}</span>
+                  ${ing.description}
+              </div>
+          </li>
+        `
       }
 }
 
