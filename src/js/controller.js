@@ -6,7 +6,6 @@ import recipeView from './views/recipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-const recipeContainer = document.querySelector('.recipe');
 
  const timeout = function(s){
   return new Promise(function(_,reject){
@@ -24,7 +23,7 @@ const recipeContainer = document.querySelector('.recipe');
 
 
 
-const controlRecipies = async function(){
+const controlRecipes = async function(){
 try{
 
  const id = window.location.hash.slice(1); 
@@ -48,10 +47,10 @@ recipeView.render(model.state.recipe)
 }
 }
 
-controlRecipies()
+controlRecipes()
 
 arr = ['hashchange','load'];
 arr.forEach(el => {
-  window.addEventListener(el,controlRecipies)
+  window.addEventListener(el,controlRecipes)
 });
 

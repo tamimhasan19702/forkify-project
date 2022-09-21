@@ -538,7 +538,6 @@ var _modelJs = require("./model/model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 var _runtime = require("regenerator-runtime/runtime");
-const recipeContainer = document.querySelector(".recipe");
 const timeout = function(s) {
     return new Promise(function(_, reject) {
         setTimeout(function() {
@@ -548,7 +547,7 @@ const timeout = function(s) {
 };
 //api - https://forkify-api.herokuapp.com/v2
 //////////////////////////////////////////
-const controlRecipies = async function() {
+const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
         if (!id) return;
@@ -562,13 +561,13 @@ const controlRecipies = async function() {
         alert(err);
     }
 };
-controlRecipies();
+controlRecipes();
 arr = [
     "hashchange",
     "load"
 ];
 arr.forEach((el)=>{
-    window.addEventListener(el, controlRecipies);
+    window.addEventListener(el, controlRecipes);
 });
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC"}],"49tUX":[function(require,module,exports) {
@@ -2326,23 +2325,23 @@ parcelHelpers.defineInteropFlag(exports);
 var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class recipeView {
-    #parentElement = document.querySelector(".recipe");
-    #data;
+    _parentElement = document.querySelector(".recipe");
+    _data;
     render(data) {
-        this.#data = data;
-        const markUp = this.#generateMarkup;
-        this.#clear();
-        recipeContainer.insertAdjacentHTML("afterbegin", markUp);
+        this._data = data;
+        const markUp = this._generateMarkup();
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     }
-     #clear() {
-        this.#parentElement.innerHTML = "";
+    _clear() {
+        this._parentElement.innerHTML = "";
     }
-     #generateMarkup() {
+    _generateMarkup() {
         return `
   <figure class="recipe-fig">
-  <img src="${this.#data.image}" alt="${this.#data.title}" class="recipe-img">
+  <img src="${this._data.image}" alt="${this._data.title}" class="recipe-img">
   <h1 class="recipe-title">
-    <span>${this.#data.title}</span>
+    <span>${this._data.title}</span>
   </h1>
   </figure>
 
@@ -2351,7 +2350,7 @@ class recipeView {
     <svg class="recipe-info-icon">
      <use href="${0, _iconsSvgDefault.default}#icon-clock"></use>
     </svg>
-    <span class="recipe-info-data recipe-info-data-minutes">${this.#data.cookingTime}</span>
+    <span class="recipe-info-data recipe-info-data-minutes">${this._data.cookingTime}</span>
     <span class="recipe-info-text">Minutes</span>
   </div>
 
@@ -2359,7 +2358,7 @@ class recipeView {
     <svg class="recipe-info-icon">
       <use href="${0, _iconsSvgDefault.default}#icon-users"></use>
     </svg>
-    <span class="recipe-info-data recipe-info-data-people">${this.#data.servings}</span>
+    <span class="recipe-info-data recipe-info-data-people">${this._data.servings}</span>
     <span class="recipe-info-text">Servings</span>
  
   <div class="recipe-info-buttons">
@@ -2392,7 +2391,7 @@ class recipeView {
  <h2 class="heading-2">Recipe ingredients</h2>
  <ul class="recipe-ingredient-list">
 
-${this.#data.ingredients.map((ing)=>{
+${this._data.ingredients.map((ing)=>{
             return `
   <li class="recipe-ingredient">
         <svg class="recipe-icon">
@@ -2414,10 +2413,10 @@ ${this.#data.ingredients.map((ing)=>{
 <h2 class="heading-2">How to cook it</h2>
 <p class="recipe-directions-text">
     This recipe was carefully designed and tested by 
-    <span class="recipe-publisher">${this.#data.publisher}</span>
+    <span class="recipe-publisher">${this._data.publisher}</span>
  PLease check out directions at their website.
 </p>
-<a href="${this.#data.sourceUrl}" class="btn-small recipe-btn" target="blank">
+<a href="${this._data.sourceUrl}" class="btn-small recipe-btn" target="blank">
     <span>Directions</span>
     <svg class="search-icon">
         <use href="./img/icons.svg#icon-arrow-right"></use>
@@ -2434,8 +2433,8 @@ ${this.#data.ingredients.map((ing)=>{
           </svg>
          </div>
         `;
-        this.#parentElement.innerHTML = "";
-        this.#parentElement.insertAdjacentHTML("afterbegin", markUp);
+        this._parentElement.innerHTML = "";
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     };
 }
 exports.default = new recipeView();
