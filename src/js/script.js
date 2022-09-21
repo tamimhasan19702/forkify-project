@@ -155,4 +155,8 @@ recipeContainer.insertAdjacentHTML('afterbegin',markUp);
 
 showRecipe()
 
-window.addEventListener('hashchange',showRecipe);
+arr = ['hashchange','load'];
+arr.forEach(el => {
+  window.addEventListener(el,showRecipe)
+});
+

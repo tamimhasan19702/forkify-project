@@ -673,7 +673,13 @@ ${recipe.ingredients.map((ing)=>{
     }
 };
 showRecipe();
-window.addEventListener("hashchange", showRecipe);
+arr = [
+    "hashchange",
+    "load"
+];
+arr.forEach((el)=>{
+    window.addEventListener(el, showRecipe);
+});
 
 },{"core-js/modules/web.immediate.js":"49tUX","url:../../img/icons.svg":"8LrKW","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
