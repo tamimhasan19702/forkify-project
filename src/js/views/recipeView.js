@@ -5,6 +5,7 @@ class recipeView {
     _parentElement = document.querySelector('.recipe');
     _data;
     _errorMessage =  `We Couldn't Find The Recipe. Please Try Another One!!`
+    _Message =  ``
 
     render(data){
     this._data = data;
@@ -87,7 +88,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
 <a href="${this._data.sourceUrl}" class="btn-small recipe-btn" target="blank">
     <span>Directions</span>
     <svg class="search-icon">
-        <use href="./img/icons.svg#icon-arrow-right"></use>
+        <use href="${icons}#icon-arrow-right"></use>
     </svg>
 </a>
 </div>
@@ -135,6 +136,21 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
             </svg>
          </div>
         <p>${this._errorMessage}</p>
+       </div>
+        `
+      this._clear();
+      this._parentElement.insertAdjacentHTML('afterbegin',markUp); 
+      }
+      renderSuccess(){
+        const markUp = `
+        <div class="message">
+         <div>
+            <svg>
+                <use href="${icons}#icon-smile">
+                </use>
+            </svg>
+         </div>
+        <p>${this._Message}</p>
        </div>
         `
       this._clear();

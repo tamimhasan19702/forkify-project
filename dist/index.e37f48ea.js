@@ -537,7 +537,10 @@ var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _modelJs = require("./model/model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
+var _searchViewJs = require("./views/searchView.js");
+var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _runtime = require("regenerator-runtime/runtime");
+var _regeneratorRuntime = require("regenerator-runtime");
 //api - https://forkify-api.herokuapp.com/v2
 //////////////////////////////////////////
 const controlRecipes = async function() {
@@ -556,10 +559,21 @@ const controlRecipes = async function() {
 };
 const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
 };
 init();
+//search query
+const controlSearchResults = async function() {
+    try {
+        const query = (0, _searchViewJsDefault.default).getQuery();
+        if (!query) return;
+        await _modelJs.loadSearchResults("pizza");
+    } catch (err) {
+        console.log(err);
+    }
+};
 
-},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","regenerator-runtime":"dXNgZ","./views/searchView.js":"9OQAM"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("../modules/web.clear-immediate");
 require("../modules/web.set-immediate");
@@ -2281,11 +2295,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
+parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("../config");
 var _helper = require("../helper");
 const state = {
-    recipe: {}
+    recipe: {},
+    search: {
+        query: "",
+        results: []
+    }
 };
 const loadRecipe = async function(id) {
     try {
@@ -2302,6 +2321,24 @@ const loadRecipe = async function(id) {
             ingredients: recipe.ingredients
         };
         console.log(state.recipe);
+    } catch (err) {
+        throw err;
+    }
+};
+const loadSearchResults = async function(query) {
+    try {
+        state.search.query = query;
+        const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}?search = ${query}`);
+        console.log(data);
+        state.search.results = data.data.recipes.map((rec)=>{
+            return {
+                id: rec.id,
+                title: rec.title,
+                publisher: rec.publisher,
+                image: rec.image_url
+            };
+        });
+        console.log(state.search.results);
     } catch (err) {
         throw err;
     }
@@ -2352,6 +2389,7 @@ class recipeView {
     _parentElement = document.querySelector(".recipe");
     _data;
     _errorMessage = `We Couldn't Find The Recipe. Please Try Another One!!`;
+    _Message = ``;
     render(data) {
         this._data = data;
         const markUp = this._generateMarkup();
@@ -2431,7 +2469,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
 <a href="${this._data.sourceUrl}" class="btn-small recipe-btn" target="blank">
     <span>Directions</span>
     <svg class="search-icon">
-        <use href="./img/icons.svg#icon-arrow-right"></use>
+        <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
     </svg>
 </a>
 </div>
@@ -2478,6 +2516,21 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
             </svg>
          </div>
         <p>${this._errorMessage}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
+    renderSuccess() {
+        const markUp = `
+        <div class="message">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
+                </use>
+            </svg>
+         </div>
+        <p>${this._Message}</p>
        </div>
         `;
         this._clear();
@@ -2776,6 +2829,23 @@ Fraction.primeFactors = function(n) {
 };
 module.exports.Fraction = Fraction;
 
-},{}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
+},{}],"9OQAM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class SearchView {
+    _parentEl = document.querySelector(".search");
+    getQuery() {
+        this._parentEl.querySelector(".search-field").value;
+    }
+    addHandlerSearch(handler) {
+        this._parentEl.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            handler();
+        });
+    }
+}
+exports.default = new SearchView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
 
 //# sourceMappingURL=index.e37f48ea.js.map
