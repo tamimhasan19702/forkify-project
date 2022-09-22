@@ -7,12 +7,9 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 
- 
  //api - https://forkify-api.herokuapp.com/v2
 
  //////////////////////////////////////////
-
-
 
 
 const controlRecipes = async function(){
@@ -31,18 +28,14 @@ const {recipe} = model.state;
 //rendering recipe
 recipeView.render(model.state.recipe)
 
-
-
-
 }catch(err){
   alert(err)
 }
 }
 
-controlRecipes()
+const init  = () => {
+recipeView.addHandlerRender(controlRecipes);
+}
+init()
 
-arr = ['hashchange','load'];
-arr.forEach(el => {
-  window.addEventListener(el,controlRecipes)
-});
 

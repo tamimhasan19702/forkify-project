@@ -119,6 +119,10 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
           </li>
         `
       }
+
+      addHandlerRender(handler){
+        ['hashchange','load'].forEach(el => window.addEventListener(el,handler));
+      }
 }
 
 export default new recipeView();

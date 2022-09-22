@@ -554,14 +554,10 @@ const controlRecipes = async function() {
         alert(err);
     }
 };
-controlRecipes();
-arr = [
-    "hashchange",
-    "load"
-];
-arr.forEach((el)=>{
-    window.addEventListener(el, controlRecipes);
-});
+const init = ()=>{
+    (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+};
+init();
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
@@ -2311,7 +2307,7 @@ const loadRecipe = async function(id) {
     }
 };
 
-},{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../config":"k5Hzs","../helper":"lVRAz"}],"k5Hzs":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -2345,7 +2341,7 @@ const getJSON = async function(url) {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config":"k5Hzs"}],"l60JC":[function(require,module,exports) {
+},{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 //icons
@@ -2464,6 +2460,12 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
               </div>
           </li>
         `;
+    }
+    addHandlerRender(handler) {
+        [
+            "hashchange",
+            "load"
+        ].forEach((el)=>window.addEventListener(el, handler));
     }
 }
 exports.default = new recipeView();
