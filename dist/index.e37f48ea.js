@@ -551,7 +551,7 @@ const controlRecipes = async function() {
         //rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        alert(err);
+        (0, _recipeViewJsDefault.default).renderError(`${err}`);
     }
 };
 const init = ()=>{
@@ -2303,7 +2303,7 @@ const loadRecipe = async function(id) {
         };
         console.log(state.recipe);
     } catch (err) {
-        alert(err);
+        throw err;
     }
 };
 
@@ -2436,7 +2436,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
 </div>
 `;
     }
-    renderSpinner = function() {
+    renderSpinner = ()=>{
         const markUp = `
         <div class="spinner">
           <svg>
@@ -2444,7 +2444,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
           </svg>
          </div>
         `;
-        this._parentElement.innerHTML = "";
+        this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     };
     _generateMarkUpGradient(ing) {
@@ -2466,6 +2466,21 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
             "hashchange",
             "load"
         ].forEach((el)=>window.addEventListener(el, handler));
+    }
+    renderError(msg) {
+        const markUp = `
+        <div class="error">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
+                </use>
+            </svg>
+         </div>
+        <p>${msg}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     }
 }
 exports.default = new recipeView();

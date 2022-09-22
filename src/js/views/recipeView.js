@@ -93,7 +93,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
 `
     }
 
-    renderSpinner = function(){
+    renderSpinner = () => {
         const markUp = `
         <div class="spinner">
           <svg>
@@ -101,7 +101,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
           </svg>
          </div>
         `
-        this._parentElement.innerHTML = '';
+        this._clear();
         this._parentElement.insertAdjacentHTML('afterbegin',markUp);
       }
 
@@ -123,6 +123,23 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
       addHandlerRender(handler){
         ['hashchange','load'].forEach(el => window.addEventListener(el,handler));
       }
+     
+      renderError(msg){
+        const markUp = `
+        <div class="error">
+         <div>
+            <svg>
+                <use href="${icons}#icon-alert-triangle">
+                </use>
+            </svg>
+         </div>
+        <p>${msg}</p>
+       </div>
+        `
+      this._clear();
+      this._parentElement.insertAdjacentHTML('afterbegin',markUp); 
+      }
+
 }
 
 export default new recipeView();

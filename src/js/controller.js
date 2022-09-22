@@ -29,7 +29,7 @@ const {recipe} = model.state;
 recipeView.render(model.state.recipe)
 
 }catch(err){
-  alert(err)
+  recipeView.renderError(`${err}`)
 }
 }
 
