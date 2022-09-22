@@ -4,6 +4,7 @@ import { Fraction } from 'fractional';
 class recipeView {
     _parentElement = document.querySelector('.recipe');
     _data;
+    _errorMessage =  `We Couldn't Find The Recipe. Please Try Another One!!`
 
     render(data){
     this._data = data;
@@ -124,7 +125,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
         ['hashchange','load'].forEach(el => window.addEventListener(el,handler));
       }
      
-      renderError(msg){
+      renderError(){
         const markUp = `
         <div class="error">
          <div>
@@ -133,7 +134,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join('')}
                 </use>
             </svg>
          </div>
-        <p>${msg}</p>
+        <p>${this._errorMessage}</p>
        </div>
         `
       this._clear();

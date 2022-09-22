@@ -551,7 +551,7 @@ const controlRecipes = async function() {
         //rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        (0, _recipeViewJsDefault.default).renderError(`${err}`);
+        (0, _recipeViewJsDefault.default).renderError();
     }
 };
 const init = ()=>{
@@ -2351,6 +2351,7 @@ var _fractional = require("fractional");
 class recipeView {
     _parentElement = document.querySelector(".recipe");
     _data;
+    _errorMessage = `We Couldn't Find The Recipe. Please Try Another One!!`;
     render(data) {
         this._data = data;
         const markUp = this._generateMarkup();
@@ -2467,7 +2468,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
             "load"
         ].forEach((el)=>window.addEventListener(el, handler));
     }
-    renderError(msg) {
+    renderError() {
         const markUp = `
         <div class="error">
          <div>
@@ -2476,7 +2477,7 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
                 </use>
             </svg>
          </div>
-        <p>${msg}</p>
+        <p>${this._errorMessage}</p>
        </div>
         `;
         this._clear();
