@@ -539,6 +539,8 @@ var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
 var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
+var _resultsViewJs = require("./views/resultsView.js");
+var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 var _regeneratorRuntime = require("regenerator-runtime");
 //api - https://forkify-api.herokuapp.com/v2
@@ -546,6 +548,7 @@ var _regeneratorRuntime = require("regenerator-runtime");
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
+        //render spinner
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
         //loading recipe
@@ -557,23 +560,27 @@ const controlRecipes = async function() {
         (0, _recipeViewJsDefault.default).renderError();
     }
 };
+//search query
+const controlSearchResults = async function() {
+    try {
+        (0, _resultsViewJsDefault.default).renderSpinner();
+        // get search query
+        const query = (0, _searchViewJsDefault.default).getQuery();
+        if (!query) return;
+        //load search results
+        await _modelJs.loadSearchResults("pizza");
+    //render results
+    } catch (err) {
+        console.log(err);
+    }
+};
 const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
 };
 init();
-//search query
-const controlSearchResults = async function() {
-    try {
-        const query = (0, _searchViewJsDefault.default).getQuery();
-        if (!query) return;
-        await _modelJs.loadSearchResults("pizza");
-    } catch (err) {
-        console.log(err);
-    }
-};
 
-},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","regenerator-runtime":"dXNgZ"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","regenerator-runtime":"dXNgZ","./views/resultsView.js":"cSbZE"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("../modules/web.clear-immediate");
 require("../modules/web.set-immediate");
@@ -2397,35 +2404,95 @@ class recipeView extends (0, _viewDefault.default) {
             "load"
         ].forEach((el)=>window.addEventListener(el, handler));
     }
-    renderError() {
-        const markUp = `
-        <div class="error">
-         <div>
+    _generateMarkup() {
+        return `
+      <figure class="recipe-fig">
+      <img src="${this._data.image}" alt="${this._data.title}" class="recipe-img">
+      <h1 class="recipe-title">
+        <span>${this._data.title}</span>
+      </h1>
+      </figure>
+    
+      <div class="recipe-details">
+      <div class="recipe-info">
+        <svg class="recipe-info-icon">
+         <use href="${0, _iconsSvgDefault.default}#icon-clock"></use>
+        </svg>
+        <span class="recipe-info-data recipe-info-data-minutes">${this._data.cookingTime}</span>
+        <span class="recipe-info-text">Minutes</span>
+      </div>
+    
+      <div class="recipe-info">
+        <svg class="recipe-info-icon">
+          <use href="${0, _iconsSvgDefault.default}#icon-users"></use>
+        </svg>
+        <span class="recipe-info-data recipe-info-data-people">${this._data.servings}</span>
+        <span class="recipe-info-text">Servings</span>
+     
+      <div class="recipe-info-buttons">
+        <button class="btn-tiny btn-increase-servings">
+         <svg>
+            <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
+         </svg>
+        </button>
+        <button class="btn-tiny btn-increase-servings">
             <svg>
-                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
-                </use>
+                <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
             </svg>
-         </div>
-        <p>${this._errorMessage}</p>
-       </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+        </button>
+      </div>
+      </div> 
+    
+     <div class="recipe-user-generated">
+     <svg>
+        <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+     </svg>
+     </div>
+     <button class="btn-round">
+     <svg>
+        <use href="${0, _iconsSvgDefault.default}#icon-bookmark-fill"></use>
+     </svg>
+     </button>
+     </div>
+    
+     <div class="recipe-ingredients">
+     <h2 class="heading-2">Recipe ingredients</h2>
+     <ul class="recipe-ingredient-list">
+    
+    ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
+        
+    </ul>
+    </div>
+    
+    <div class="recipe-directions">
+    <h2 class="heading-2">How to cook it</h2>
+    <p class="recipe-directions-text">
+        This recipe was carefully designed and tested by 
+        <span class="recipe-publisher">${this._data.publisher}</span>
+     PLease check out directions at their website.
+    </p>
+    <a href="${this._data.sourceUrl}" class="btn-small recipe-btn" target="blank">
+        <span>Directions</span>
+        <svg class="search-icon">
+            <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
+        </svg>
+    </a>
+    </div>
+    `;
     }
-    renderSuccess() {
-        const markUp = `
-        <div class="message">
-         <div>
-            <svg>
-                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
-                </use>
-            </svg>
-         </div>
-        <p>${this._Message}</p>
-       </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    _generateMarkUpGradient(ing) {
+        return `
+          <li class="recipe-ingredient">
+                <svg class="recipe-icon">
+                 <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
+                </svg>
+                <div class="recipe-quantity">${ing.quantity ? new (0, _fractional.Fraction)(ing.quantity).toString() : ""}</div>
+                <div class="recipe-description">
+                    <span class="recipe-unit">${ing.unit}</span>
+                    ${ing.description}
+                </div>
+            </li>
+          `;
     }
 }
 exports.default = new recipeView();
@@ -2736,82 +2803,6 @@ class View {
     _clear() {
         this._parentElement.innerHTML = "";
     }
-    _generateMarkup() {
-        return `
-  <figure class="recipe-fig">
-  <img src="${this._data.image}" alt="${this._data.title}" class="recipe-img">
-  <h1 class="recipe-title">
-    <span>${this._data.title}</span>
-  </h1>
-  </figure>
-
-  <div class="recipe-details">
-  <div class="recipe-info">
-    <svg class="recipe-info-icon">
-     <use href="${0, _iconsSvgDefault.default}#icon-clock"></use>
-    </svg>
-    <span class="recipe-info-data recipe-info-data-minutes">${this._data.cookingTime}</span>
-    <span class="recipe-info-text">Minutes</span>
-  </div>
-
-  <div class="recipe-info">
-    <svg class="recipe-info-icon">
-      <use href="${0, _iconsSvgDefault.default}#icon-users"></use>
-    </svg>
-    <span class="recipe-info-data recipe-info-data-people">${this._data.servings}</span>
-    <span class="recipe-info-text">Servings</span>
- 
-  <div class="recipe-info-buttons">
-    <button class="btn-tiny btn-increase-servings">
-     <svg>
-        <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
-     </svg>
-    </button>
-    <button class="btn-tiny btn-increase-servings">
-        <svg>
-            <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
-        </svg>
-    </button>
-  </div>
-  </div> 
-
- <div class="recipe-user-generated">
- <svg>
-    <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
- </svg>
- </div>
- <button class="btn-round">
- <svg>
-    <use href="${0, _iconsSvgDefault.default}#icon-bookmark-fill"></use>
- </svg>
- </button>
- </div>
-
- <div class="recipe-ingredients">
- <h2 class="heading-2">Recipe ingredients</h2>
- <ul class="recipe-ingredient-list">
-
-${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
-    
-</ul>
-</div>
-
-<div class="recipe-directions">
-<h2 class="heading-2">How to cook it</h2>
-<p class="recipe-directions-text">
-    This recipe was carefully designed and tested by 
-    <span class="recipe-publisher">${this._data.publisher}</span>
- PLease check out directions at their website.
-</p>
-<a href="${this._data.sourceUrl}" class="btn-small recipe-btn" target="blank">
-    <span>Directions</span>
-    <svg class="search-icon">
-        <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
-    </svg>
-</a>
-</div>
-`;
-    }
     renderSpinner = ()=>{
         const markUp = `
         <div class="spinner">
@@ -2823,19 +2814,35 @@ ${this._data.ingredients.map(this._generateMarkUpGradient).join("")}
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     };
-    _generateMarkUpGradient(ing) {
-        return `
-        <li class="recipe-ingredient">
-              <svg class="recipe-icon">
-               <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
-              </svg>
-              <div class="recipe-quantity">${ing.quantity ? new Fraction(ing.quantity).toString() : ""}</div>
-              <div class="recipe-description">
-                  <span class="recipe-unit">${ing.unit}</span>
-                  ${ing.description}
-              </div>
-          </li>
+    renderError() {
+        const markUp = `
+        <div class="error">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
+                </use>
+            </svg>
+         </div>
+        <p>${this._errorMessage}</p>
+       </div>
         `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
+    renderSuccess() {
+        const markUp = `
+        <div class="message">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
+                </use>
+            </svg>
+         </div>
+        <p>${this._Message}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     }
 }
 exports.default = View;
@@ -2862,6 +2869,16 @@ class SearchView {
 }
 exports.default = new SearchView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cSbZE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class resultsView extends (0, _viewDefault.default) {
+    _parentElement = document.querySelector(".results");
+}
+exports.default = new resultsView();
+
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
 
 //# sourceMappingURL=index.e37f48ea.js.map
