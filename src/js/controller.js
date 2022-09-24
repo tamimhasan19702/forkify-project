@@ -1,8 +1,7 @@
 
 import * as model from './model/model.js'
 import recipeView from './views/recipeView.js';
-import searchView from './views/searchView.js';
-import resultsView from './views/resultsView.js';
+
 //import icons
 
 import 'core-js/stable';
