@@ -1,5 +1,5 @@
 
-import * as model from './model/model.js'
+import * as model from './model/model'
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
@@ -24,7 +24,7 @@ try{
  recipeView.renderSpinner();  
 //loading recipe
 await model.loadRecipe(id);
-const {recipe} = model.state;
+// const {recipe} = model.state;
 //rendering recipe
 recipeView.render(model.state.recipe)
 }catch(err){
@@ -37,13 +37,15 @@ const controlSearchResults = async function (){
   try{
 
     resultsView.renderSpinner();
+    console.log(resultsView);
 // get search query
   const query = searchView.getQuery();
   if(!query) return;
 //load search results
    await model.loadSearchResults('pizza')
 //render results
-
+  console.log(model.states.search.results)
+  resultsView.render(model.state.search.results)
   }catch(err){
     console.log(err);
   }  
