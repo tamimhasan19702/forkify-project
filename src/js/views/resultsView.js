@@ -1,5 +1,7 @@
-class resultsView{
+import View from "./View";
 
+class resultsView extends View{
+  _parentElement = document.querySelector('.results');
 }
 
-export default resultsView;
+export default new resultsView();

@@ -2,6 +2,7 @@
 import * as model from './model/model.js'
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
 //import icons
 
 import 'core-js/stable';
@@ -35,7 +36,7 @@ recipeView.render(model.state.recipe)
 const controlSearchResults = async function (){
   try{
 
-    resultsView.renderSpinner();
+    resultsView.renderSpinner()
 // get search query
   const query = searchView.getQuery();
   if(!query) return;
