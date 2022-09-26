@@ -35,4 +35,11 @@ export const loadRecipe = async function (id){
 
 //recipe functionality
 
+export const loadSearchResults = async function(query){
+  try{
 
+  }catch(err){
+    console.log(`${err}`);
+    throw err;
+  }
+}

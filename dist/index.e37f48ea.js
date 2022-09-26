@@ -1701,6 +1701,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
+parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("../config");
 var _helper = require("../helper");
@@ -1729,8 +1730,8 @@ const loadRecipe = async function(id) {
     } catch (err) {
         throw err;
     }
-} //recipe functionality
-;
+};
+const loadSearchResults = async function(query) {};
 
 },{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
 /**
