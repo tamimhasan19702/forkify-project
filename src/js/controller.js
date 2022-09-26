@@ -1,7 +1,7 @@
 
 import * as model from './model/model.js'
 import recipeView from './views/recipeView.js';
-
+import searchView from './views/searchView.js';
 //import icons
 
 import 'core-js/stable';
