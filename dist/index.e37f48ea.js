@@ -2505,6 +2505,8 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
     _data;
     render(data) {
+        //error handling
+        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const markUp = this._generateMarkup();
         this._clear();
@@ -2524,7 +2526,7 @@ class View {
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     };
-    renderError() {
+    renderError(message = this._errorMessage) {
         const markUp = `
         <div class="error">
          <div>
@@ -2533,13 +2535,13 @@ class View {
                 </use>
             </svg>
          </div>
-        <p>${this._errorMessage}</p>
+        <p>${message}</p>
        </div>
         `;
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     }
-    renderSuccess() {
+    renderSuccess(message = this._Message) {
         const markUp = `
         <div class="message">
          <div>
@@ -2548,7 +2550,7 @@ class View {
                 </use>
             </svg>
          </div>
-        <p>${this._Message}</p>
+        <p>${message}</p>
        </div>
         `;
         this._clear();
@@ -2878,6 +2880,8 @@ var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class resultsView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".results");
+    _errorMessage = `No recipes found according to your query. Please try again ;) `;
+    _Message = ``;
     _generateMarkup() {
         console.log(this._data);
         return this._data.map(this._generateMarkupPreview).join();

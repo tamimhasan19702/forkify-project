@@ -3,6 +3,9 @@ export default class View{
     
     _data;
     render(data){
+    //error handling
+    if(!data || (Array.isArray(data) && data.length === 0) ) return this.renderError();
+
     this._data = data;
     const markUp = this._generateMarkup();
     this._clear()
@@ -25,7 +28,7 @@ export default class View{
         this._parentElement.insertAdjacentHTML('afterbegin',markUp);
       }
 
-      renderError(){
+      renderError(message = this._errorMessage){
         const markUp = `
         <div class="error">
          <div>
@@ -34,13 +37,13 @@ export default class View{
                 </use>
             </svg>
          </div>
-        <p>${this._errorMessage}</p>
+        <p>${message}</p>
        </div>
         `
       this._clear();
       this._parentElement.insertAdjacentHTML('afterbegin',markUp); 
       }
-      renderSuccess(){
+      renderSuccess(message = this._Message){
         const markUp = `
         <div class="message">
          <div>
@@ -49,7 +52,7 @@ export default class View{
                 </use>
             </svg>
          </div>
-        <p>${this._Message}</p>
+        <p>${message}</p>
        </div>
         `
       this._clear();
