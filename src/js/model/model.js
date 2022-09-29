@@ -26,7 +26,6 @@ export const loadRecipe = async function (id){
         ingredients: recipe.ingredients
       }
       
-      console.log(state.recipe);
     }catch(err){
         throw(err)
     }     
@@ -37,19 +36,22 @@ export const loadRecipe = async function (id){
 
 export const loadSearchResults = async function(query){
   try{
-  const data = await getJSON(`${API_URL}?search=${query}`);
-  console.log(data);
+  state.search.query = query;
 
-  data.data.recipes.map(rec => {
-    return{
+  const data = await getJSON(`${API_URL}?search=${query}`);
+  console.log(data)
+
+  state.search.results = data.data.recipes.map(rec => {
+    return {
       id: rec.id,
       title: rec.title,
       publisher: rec.publisher,
-      image: rec.image_url
-    }
-  })
+      image: rec.image,
+    };
+  });
   }catch(err){
     console.log(`${err}`);
     throw err;
   }
 }
+

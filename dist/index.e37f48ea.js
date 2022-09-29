@@ -563,13 +563,10 @@ const controlRecipes = async function() {
 //search query
 const controlSearchResults = async function() {
     try {
-        (0, _resultsViewJsDefault.default).renderSpinner();
-        // get search query
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
-        //load search results
-        await _modelJs.loadSearchResults("pizza");
-    //render results
+        await _modelJs.loadSearchResults(query);
+        console.log(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
     }
@@ -1730,21 +1727,21 @@ const loadRecipe = async function(id) {
             cookingTime: recipe.cooking_time,
             ingredients: recipe.ingredients
         };
-        console.log(state.recipe);
     } catch (err) {
         throw err;
     }
 };
 const loadSearchResults = async function(query) {
     try {
+        state.search.query = query;
         const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}?search=${query}`);
         console.log(data);
-        data.data.recipes.map((rec)=>{
+        state.search.results = data.data.recipes.map((rec)=>{
             return {
                 id: rec.id,
                 title: rec.title,
                 publisher: rec.publisher,
-                image: rec.image_url
+                image: rec.image
             };
         });
     } catch (err) {
@@ -2397,6 +2394,57 @@ class recipeView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".recipe");
     _errorMessage = `We Couldn't Find The Recipe. Please Try Another One!!`;
     _Message = ``;
+    _data;
+    render(data) {
+        this._data = data;
+        const markUp = this._generateMarkup();
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
+    _clear() {
+        this._parentElement.innerHTML = "";
+    }
+    renderSpinner = ()=>{
+        const markUp = `
+        <div class="spinner">
+          <svg>
+              <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
+          </svg>
+         </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    };
+    renderError() {
+        const markUp = `
+        <div class="error">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
+                </use>
+            </svg>
+         </div>
+        <p>${this._errorMessage}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
+    renderSuccess() {
+        const markUp = `
+        <div class="message">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
+                </use>
+            </svg>
+         </div>
+        <p>${this._Message}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
     addHandlerRender(handler) {
         [
             "hashchange",
@@ -2502,57 +2550,6 @@ parcelHelpers.defineInteropFlag(exports);
 var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
-    _data;
-    render(data) {
-        this._data = data;
-        const markUp = this._generateMarkup();
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    }
-    _clear() {
-        this._parentElement.innerHTML = "";
-    }
-    renderSpinner = ()=>{
-        const markUp = `
-        <div class="spinner">
-          <svg>
-              <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
-          </svg>
-         </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    };
-    renderError() {
-        const markUp = `
-        <div class="error">
-         <div>
-            <svg>
-                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
-                </use>
-            </svg>
-         </div>
-        <p>${this._errorMessage}</p>
-       </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    }
-    renderSuccess() {
-        const markUp = `
-        <div class="message">
-         <div>
-            <svg>
-                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
-                </use>
-            </svg>
-         </div>
-        <p>${this._Message}</p>
-       </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    }
 }
 exports.default = View;
 
@@ -2850,22 +2847,19 @@ module.exports.Fraction = Fraction;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class searchView {
-    _parentELement = document.querySelector(".search");
+    _parentElement = document.querySelector(".search");
     getQuery() {
-        const query = this._parentELement.querySelector(".search-field").ariaValueMax;
+        const query = this._parentElement.querySelector(".search-field").value;
         this._clearInput();
         return query;
     }
     _clearInput() {
-        this._parentELement.addEventListener("submit", function(e) {
+        this._parentElement.querySelector(".search-field").value = "";
+    }
+    addHandlerSearch(handler) {
+        this._parentElement.addEventListener("submit", function(e) {
             e.preventDefault();
             handler();
-        });
-    }
-    addHandlerSearch(handler1) {
-        this._parentELement.addEventListener("submit", function(e) {
-            e.preventDefault();
-            handler1();
         });
     }
 }
@@ -2878,6 +2872,26 @@ var _view = require("./View");
 var _viewDefault = parcelHelpers.interopDefault(_view);
 class resultsView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".results");
+    _generateMarkup() {
+        return `
+    <li class="preview">
+    <a href="#23456" class="preview-link preview-link-active">
+        <figure class="preview-fig">
+            <img src="./img/test-1.jpg" alt="Test">
+        </figure>
+        <div class="preview-data">
+            <h4 class="preview-title">Pasta with Tomato Cream ... </h4>
+            <p class="preview-publisher">The Pioneer Woman </p>
+            <div class="preview-user-generated">
+                <svg>
+                <use href="./img/icons.svg#icon-user"></use>
+                </svg>
+            </div>
+        </div>
+    </a>
+    </li>   
+    `;
+    }
 }
 exports.default = new resultsView();
 

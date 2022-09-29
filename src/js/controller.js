@@ -33,24 +33,24 @@ recipeView.render(model.state.recipe)
 }
 
 //search query
-const controlSearchResults = async function (){
-  try{
 
-    resultsView.renderSpinner()
-// get search query
-  const query = searchView.getQuery();
-  if(!query) return;
-//load search results
-   await model.loadSearchResults('pizza')
-//render results
+const controlSearchResults = async function(){
+  try{
+   const query = searchView.getQuery();
+   if(!query) return;
+
+   await model.loadSearchResults(query)
+   console.log(model.state.search.results)
 
   }catch(err){
-    console.log(err);
-  }  
+    console.log(err)
+  }
 }
 
+
+
 const init  = () => {
-  recipeView.addHandlerRender(controlRecipes);
-  searchView.addHandlerSearch(controlSearchResults);
+ recipeView.addHandlerRender(controlRecipes);
+ searchView.addHandlerSearch(controlSearchResults);
   }
   init()
