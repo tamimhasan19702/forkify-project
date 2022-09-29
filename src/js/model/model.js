@@ -46,7 +46,7 @@ export const loadSearchResults = async function(query){
       id: rec.id,
       title: rec.title,
       publisher: rec.publisher,
-      image: rec.image,
+      image: rec.image_url,
     };
   });
   }catch(err){
