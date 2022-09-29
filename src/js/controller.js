@@ -36,10 +36,16 @@ recipeView.render(model.state.recipe)
 
 const controlSearchResults = async function(){
   try{
+    resultsView.renderSpinner()
+
+    //get search queries
    const query = searchView.getQuery();
    if(!query) return;
 
+   //load search results
    await model.loadSearchResults(query)
+
+   //resnder search results
    console.log(model.state.search.results)
 
   }catch(err){
