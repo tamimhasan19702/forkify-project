@@ -543,6 +543,7 @@ var _resultsViewJs = require("./views/resultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 var _regeneratorRuntime = require("regenerator-runtime");
+if (module.hot) module.hot.accept();
 //api - https://forkify-api.herokuapp.com/v2
 //////////////////////////////////////////
 const controlRecipes = async function() {
@@ -2886,18 +2887,13 @@ class resultsView extends (0, _viewDefault.default) {
     _generateMarkupPreview(result) {
         return `
     <li class="preview">
-    <a href="#${result.id}" class="preview-link preview-link-active">
+    <a href="#${result.id}" class="preview-link ">
         <figure class="preview-fig">
             <img src="${result.image}" alt="${result.title}">
         </figure>
         <div class="preview-data">
             <h4 class="preview-title">${result.title} </h4>
             <p class="preview-publisher">${result.publisher}</p>
-            <div class="preview-user-generated">
-                <svg>
-                <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-                </svg>
-            </div>
         </div>
     </a>
     </li>   

@@ -13,18 +13,13 @@ class resultsView extends View{
   _generateMarkupPreview(result){
     return `
     <li class="preview">
-    <a href="#${result.id}" class="preview-link preview-link-active">
+    <a href="#${result.id}" class="preview-link ">
         <figure class="preview-fig">
             <img src="${result.image}" alt="${result.title}">
         </figure>
         <div class="preview-data">
             <h4 class="preview-title">${result.title} </h4>
             <p class="preview-publisher">${result.publisher}</p>
-            <div class="preview-user-generated">
-                <svg>
-                <use href="${icons}#icon-user"></use>
-                </svg>
-            </div>
         </div>
     </a>
     </li>   
