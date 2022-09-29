@@ -2,6 +2,7 @@ import View from "./View";
 
 class resultsView extends View{
   _parentElement = document.querySelector('.results');
+
   _generateMarkup(){
     return `
     <li class="preview">
@@ -20,7 +21,7 @@ class resultsView extends View{
         </div>
     </a>
     </li>   
-    `
+    `;
   }
 }
 

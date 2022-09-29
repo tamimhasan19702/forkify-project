@@ -571,6 +571,7 @@ const controlSearchResults = async function() {
         await _modelJs.loadSearchResults(query);
         //resnder search results
         console.log(_modelJs.state.search.results);
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
     }
