@@ -2394,57 +2394,6 @@ class recipeView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".recipe");
     _errorMessage = `We Couldn't Find The Recipe. Please Try Another One!!`;
     _Message = ``;
-    _data;
-    render(data) {
-        this._data = data;
-        const markUp = this._generateMarkup();
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    }
-    _clear() {
-        this._parentElement.innerHTML = "";
-    }
-    renderSpinner = ()=>{
-        const markUp = `
-        <div class="spinner">
-          <svg>
-              <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
-          </svg>
-         </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    };
-    renderError() {
-        const markUp = `
-        <div class="error">
-         <div>
-            <svg>
-                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
-                </use>
-            </svg>
-         </div>
-        <p>${this._errorMessage}</p>
-       </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    }
-    renderSuccess() {
-        const markUp = `
-        <div class="message">
-         <div>
-            <svg>
-                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
-                </use>
-            </svg>
-         </div>
-        <p>${this._Message}</p>
-       </div>
-        `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
-    }
     addHandlerRender(handler) {
         [
             "hashchange",
@@ -2550,10 +2499,61 @@ parcelHelpers.defineInteropFlag(exports);
 var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
+    _data;
+    render(data) {
+        this._data = data;
+        const markUp = this._generateMarkup();
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
+    _clear() {
+        this._parentElement.innerHTML = "";
+    }
+    renderSpinner = ()=>{
+        const markUp = `
+        <div class="spinner">
+          <svg>
+              <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
+          </svg>
+         </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    };
+    renderError() {
+        const markUp = `
+        <div class="error">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle">
+                </use>
+            </svg>
+         </div>
+        <p>${this._errorMessage}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
+    renderSuccess() {
+        const markUp = `
+        <div class="message">
+         <div>
+            <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-smile">
+                </use>
+            </svg>
+         </div>
+        <p>${this._Message}</p>
+       </div>
+        `;
+        this._clear();
+        this._parentElement.insertAdjacentHTML("afterbegin", markUp);
+    }
 }
 exports.default = View;
 
-},{"../../../img/icons.svg":"g7Cgm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g7Cgm":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../img/icons.svg":"g7Cgm"}],"g7Cgm":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "icons.c78699a6.svg" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
