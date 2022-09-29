@@ -2558,7 +2558,7 @@ class View {
 }
 exports.default = View;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../img/icons.svg":"g7Cgm"}],"g7Cgm":[function(require,module,exports) {
+},{"../../../img/icons.svg":"g7Cgm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g7Cgm":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "icons.c78699a6.svg" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -2878,6 +2878,10 @@ var _viewDefault = parcelHelpers.interopDefault(_view);
 class resultsView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".results");
     _generateMarkup() {
+        console.log(this._data);
+        return this._data.map(this._generateMarkupPreview).join();
+    }
+    _generateMarkupPreview() {
         return `
     <li class="preview">
     <a href="#23456" class="preview-link preview-link-active">
