@@ -576,7 +576,8 @@ const controlSearchResults = async function() {
         console.log(_modelJs.state.search.results);
         //  resultsView.render(model.state.search.results);
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
-    //render initial pagination
+        //render initial pagination
+        (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
         console.log(err);
     }
@@ -2929,9 +2930,20 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class paginationView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".pagination");
     _generateMarkup() {
-    //page 1 and there are other pages available 
-    //page 1 but there are no pages avalable
-    //last page
+        const curPage = this._data.page;
+        const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
+        console.log(numPages);
+        //page 1 and there are other pages available 
+        if (curPage === 1 && numPages > 1) return "page 1,others";
+        //page 1 but there are no pages available
+        if (curPage === numPages && numPages > 1) return `
+        <button class="btn-inline pagination-btn-prev">
+        <svg class="search-icon">
+        <use href="${0, _iconsSvgDefault.default}#icon-arrow-left"></use>
+        </svg>
+        <span>Page ${curPage - 1}</span>
+        </button>
+        `;
     //other page
     }
 }
