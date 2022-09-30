@@ -570,7 +570,7 @@ const controlSearchResults = async function() {
         if (!query) return;
         //load search results
         await _modelJs.loadSearchResults(query);
-        //resnder search results
+        //render search results
         console.log(_modelJs.state.search.results);
         //  resultsView.render(model.state.search.results);
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
