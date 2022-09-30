@@ -11,7 +11,14 @@ class paginationView extends View{
 
         //page 1 and there are other pages available 
         if(curPage === 1 && numPages > 1){
-            return 'page 1,others'
+            return `
+            <button class="btn-inline pagination-btn-next">
+           <span>Page ${curPage + 1}</span>
+           <svg class="search-icon">
+           <use href="${icons}#icon-arrow-right"></use>
+           </svg>
+           </button>
+            `
         }
 
         //page 1 but there are no pages available
@@ -28,11 +35,24 @@ class paginationView extends View{
         
         //last page
         if(curPage < numPages){
-
+            return `
+            <button class="btn-inline pagination-btn-prev">
+            <svg class="search-icon">
+            <use href="${icons}#icon-arrow-left"></use>
+            </svg>
+            <span>Page ${curPage - 1}</span>
+            </button>
+            <button class="btn-inline pagination-btn-next">
+           <span>Page ${curPage + 1}</span>
+           <svg class="search-icon">
+           <use href="${icons}#icon-arrow-right"></use>
+           </svg>
+           </button>
+            `
         }
 
         //other page
-
+        return '';
     }
 }
 
