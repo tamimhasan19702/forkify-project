@@ -541,6 +541,8 @@ var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _resultsViewJs = require("./views/resultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
+var _paginationViewJs = require("./views/paginationView.js");
+var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 var _regeneratorRuntime = require("regenerator-runtime");
 if (module.hot) module.hot.accept();
@@ -574,6 +576,7 @@ const controlSearchResults = async function() {
         console.log(_modelJs.state.search.results);
         //  resultsView.render(model.state.search.results);
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
+    //render initial pagination
     } catch (err) {
         console.log(err);
     }
@@ -584,7 +587,7 @@ const init = ()=>{
 };
 init();
 
-},{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("../modules/web.clear-immediate");
 require("../modules/web.set-immediate");
@@ -2916,6 +2919,24 @@ class resultsView extends (0, _viewDefault.default) {
 }
 exports.default = new resultsView();
 
-},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../img/icons.svg":"g7Cgm"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../../img/icons.svg":"g7Cgm"}],"6z7bi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+var _iconsSvg = require("../../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+class paginationView extends (0, _viewDefault.default) {
+    _parentElement = document.querySelector(".pagination");
+    _generateMarkup() {
+    //page 1 and there are other pages available 
+    //page 1 but there are no pages avalable
+    //last page
+    //other page
+    }
+}
+exports.default = new paginationView();
+
+},{"./View":"5cUXS","../../../img/icons.svg":"g7Cgm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
 
 //# sourceMappingURL=index.e37f48ea.js.map
