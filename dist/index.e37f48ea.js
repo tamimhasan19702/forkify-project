@@ -2449,8 +2449,8 @@ class recipeView extends (0, _viewDefault.default) {
             const btn = e.target.closest(".btn-update-servings");
             if (!btn) return;
             console.log("btn");
-            const updateTo = +btn.dataset.updateTo;
-            handler(updateTo);
+            const { updateTo  } = btn.dataset;
+            if (+updateTo > 0) handler(+updateTo);
         });
     }
     _generateMarkup() {
