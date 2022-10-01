@@ -574,6 +574,10 @@ const controlSearchResults = async function() {
         await _modelJs.loadSearchResults(query);
         //render search results
         console.log(_modelJs.state.search.results);
+        //  resultsView.render(model.state.search.results);
+        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage(3));
+        //render initial pagination
+        (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
         console.log(err);
     }
@@ -581,7 +585,7 @@ const controlSearchResults = async function() {
 const controlPagination = function(goToPage) {
     console.log("page controller");
     //  resultsView.render(model.state.search.results);
-    (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
+    (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage(goToPage));
     //render initial pagination
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
