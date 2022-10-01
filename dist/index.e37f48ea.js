@@ -574,17 +574,21 @@ const controlSearchResults = async function() {
         await _modelJs.loadSearchResults(query);
         //render search results
         console.log(_modelJs.state.search.results);
-        //  resultsView.render(model.state.search.results);
-        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
-        //render initial pagination
-        (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
         console.log(err);
     }
 };
+const controlPagination = function(goToPage) {
+    console.log("page controller");
+    //  resultsView.render(model.state.search.results);
+    (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
+    //render initial pagination
+    (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
+};
 const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
+    (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
 init();
 
@@ -2929,13 +2933,21 @@ var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class paginationView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".pagination");
+    addHandlerClick(handler) {
+        this._parentElement.addEventListener("click", function(e) {
+            const btn = e.target.closest(".btn-inline");
+            if (!btn) return;
+            const goToPage = +btn.dataset.goto;
+            handler(goToPage);
+        });
+    }
     _generateMarkup() {
         const curPage = this._data.page;
         const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
         console.log(numPages);
         //page 1 and there are other pages available 
         if (curPage === 1 && numPages > 1) return `
-            <button class="btn-inline pagination-btn-next">
+            <button data-goto="${curPage + 1}" class="btn-inline pagination-btn-next">
            <span>Page ${curPage + 1}</span>
            <svg class="search-icon">
            <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
@@ -2944,7 +2956,7 @@ class paginationView extends (0, _viewDefault.default) {
             `;
         //page 1 but there are no pages available
         if (curPage === numPages && numPages > 1) return `
-        <button class="btn-inline pagination-btn-prev">
+        <button data-goto="${curPage - 1}"  class="btn-inline pagination-btn-prev">
         <svg class="search-icon">
         <use href="${0, _iconsSvgDefault.default}#icon-arrow-left"></use>
         </svg>
@@ -2953,13 +2965,13 @@ class paginationView extends (0, _viewDefault.default) {
         `;
         //last page
         if (curPage < numPages) return `
-            <button class="btn-inline pagination-btn-prev">
+            <button data-goto="${curPage - 1}"  class="btn-inline pagination-btn-prev">
             <svg class="search-icon">
             <use href="${0, _iconsSvgDefault.default}#icon-arrow-left"></use>
             </svg>
             <span>Page ${curPage - 1}</span>
             </button>
-            <button class="btn-inline pagination-btn-next">
+            <button data-goto="${curPage + 1}"  class="btn-inline pagination-btn-next">
            <span>Page ${curPage + 1}</span>
            <svg class="search-icon">
            <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
