@@ -554,12 +554,14 @@ const controlRecipes = async function() {
         //render spinner
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
+        //update results view to mark selected search results
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPerPage());
         //loading recipe
         await _modelJs.loadRecipe(id);
         const { recipe  } = _modelJs.state;
         //rendering recipe
         //recipeView.render(model.state.recipe)
-        (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
+        (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
         (0, _recipeViewJsDefault.default).renderError();
     }
@@ -2930,9 +2932,10 @@ class resultsView extends (0, _viewDefault.default) {
         return this._data.map(this._generateMarkupPreview).join();
     }
     _generateMarkupPreview(result) {
+        const id = window.location.hash.slice(1);
         return `
     <li class="preview">
-    <a href="#${result.id}" class="preview-link ">
+    <a href="#${result.id}" class="preview-link ${result.id === id ? "preview-link-active" : ""}">
         <figure class="preview-fig">
             <img src="${result.image}" alt="${result.title}">
         </figure>

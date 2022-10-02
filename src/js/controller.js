@@ -27,12 +27,17 @@ try{
  //render spinner
  if(!id) return;
  recipeView.renderSpinner();  
+
+ //update results view to mark selected search results
+
+ resultsView.update(model.getSearchResultsPerPage());
+
 //loading recipe
 await model.loadRecipe(id);
 const {recipe} = model.state;
 //rendering recipe
 //recipeView.render(model.state.recipe)
-recipeView.update(model.state.recipe)
+recipeView.render(model.state.recipe)
 }catch(err){
   recipeView.renderError()
 }
