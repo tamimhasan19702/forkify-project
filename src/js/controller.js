@@ -31,7 +31,8 @@ try{
 await model.loadRecipe(id);
 const {recipe} = model.state;
 //rendering recipe
-recipeView.render(model.state.recipe)
+//recipeView.render(model.state.recipe)
+recipeView.update(model.state.recipe)
 }catch(err){
   recipeView.renderError()
 }
