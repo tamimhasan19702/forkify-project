@@ -555,7 +555,7 @@ const controlRecipes = async function() {
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
         //update results view to mark selected search results
-        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPerPage());
+        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
         //loading recipe
         await _modelJs.loadRecipe(id);
         const { recipe  } = _modelJs.state;

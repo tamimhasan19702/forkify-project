@@ -30,7 +30,7 @@ try{
 
  //update results view to mark selected search results
 
- resultsView.update(model.getSearchResultsPerPage());
+ resultsView.render(model.getSearchResultsPerPage());
 
 //loading recipe
 await model.loadRecipe(id);
