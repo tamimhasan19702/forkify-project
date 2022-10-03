@@ -20,14 +20,14 @@ export default class View{
     const newMarkUp = this._generateMarkup();
     
     const newDOM = document.createRange().createContextualFragment(newMarkUp);
-    const newElements = Array.form(newDOM.querySelectorAll('*'))
-    const curElements = Array.form(this._parentElement.querySelectorAll('*'))
+    const newElements = Array.from(newDOM.querySelectorAll('*'))
+    const curElements = Array.from(this._parentElement.querySelectorAll('*'))
 
     newElements.forEach((newEl,i) => {
     const curEl = curElements[i];
 
     //updates changed text
-    if( !newEl.isEqualNode(curEl) && newEl.firstChild.nodeValue.trim() !== '' ){
+    if( !newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== '' ){
       curEl.textContent = newEl.textContent;
     }
 

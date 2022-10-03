@@ -95,8 +95,13 @@ const controlServings= (newServings) => {
 
 
 const controlAddBookMark = () => {
-  model.addBookmark(model.state.recipe)
-  recipeView.render(model.state.recipe)
+
+  if(!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+
+
+  // model.addBookmark(model.state.recipe)
+  recipeView.update(model.state.recipe)
 }
 
 const init  = () => {
