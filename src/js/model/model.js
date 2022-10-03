@@ -51,6 +51,7 @@ export const loadSearchResults = async function(query){
       image: rec.image_url,
     };
   });
+  state.search.page = 1;
   }catch(err){
     console.log(`${err}`);
     throw err;
@@ -68,24 +69,10 @@ export const getSearchResultsPerPage = (page = state.search.page) => {
 }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 export const updateServings = function(newServings){
   state.recipe.ingredients.forEach(ing => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
   });
  state.recipe.servings = newServings
-=======
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-export const updateServings = (newServings) => {
-state.recipe.ingredients.forEach(ing  => {
-  ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
-});
 
-state.recipe.servings = newServings;
-<<<<<<< HEAD
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-}
