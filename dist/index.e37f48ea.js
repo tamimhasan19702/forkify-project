@@ -592,10 +592,15 @@ const controlPagination = function(goToPage) {
     //render initial pagination
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
+const controlServings = function(newServings) {
+    _modelJs.updateServings(newServings);
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+};
 const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
+    (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings);
 };
 init();
 
@@ -1726,6 +1731,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "getSearchResultsPerPage", ()=>getSearchResultsPerPage);
+parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("../config");
 var _helper = require("../helper");
@@ -1779,6 +1785,12 @@ const getSearchResultsPerPage = (page = state.search.page)=>{
     const start = (page - 1) * state.search.resultsPerPage;
     const end = page * state.search.resultsPerPage;
     return state.search.results.slice(start, end);
+};
+const updateServings = function(newServings) {
+    state.recipe.ingredients.forEach((ing)=>{
+        ing.quantity = ing.quantity * newServings / state.recipe.servings;
+    });
+    state.recipe.servings = newServings;
 };
 
 },{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
@@ -2433,6 +2445,15 @@ class recipeView extends (0, _viewDefault.default) {
             "load"
         ].forEach((el)=>window.addEventListener(el, handler));
     }
+    addHandlerUpdateServings(handler) {
+        this._parentElement.addEventListener("click", function(e) {
+            const btn = e.target.closest(".btn-tiny");
+            if (!btn) return;
+            console.log(btn);
+            const updateTo = +btn.dataset.updateTo;
+            if (updateTo > 0) handler(updateTo);
+        });
+    }
     _generateMarkup() {
         return `
       <figure class="recipe-fig">
@@ -2459,12 +2480,12 @@ class recipeView extends (0, _viewDefault.default) {
         <span class="recipe-info-text">Servings</span>
      
       <div class="recipe-info-buttons">
-        <button class="btn-tiny btn-increase-servings">
+        <button class="btn-tiny btn-update-servings" data-update-to="${this._data.servings - 1}">
          <svg>
             <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
          </svg>
         </button>
-        <button class="btn-tiny btn-increase-servings">
+        <button class="btn-tiny btn-update-servings" data-update-to="${this._data.servings + 1}">
             <svg>
                 <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
             </svg>
