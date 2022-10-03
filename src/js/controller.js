@@ -93,6 +93,11 @@ const controlServings= (newServings) => {
    recipeView.render(model.state.recipe)
 }
 
+
+const controlAddBookMark = () => {
+  model.addBookmark(model.state.recipe)
+}
+
 const init  = () => {
  recipeView.addHandlerRender(controlRecipes);
  searchView.addHandlerSearch(controlSearchResults);
