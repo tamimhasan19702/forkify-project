@@ -90,7 +90,7 @@ const controlServings= (newServings) => {
    model.updateServings(newServings)
 
    //recipe view render
-   recipeView.render(model.state.recipe)
+   recipeView.update(model.state.recipe)
 }
 
 

@@ -596,7 +596,7 @@ const controlServings = (newServings)=>{
     //servings update
     _modelJs.updateServings(newServings);
     //recipe view render
-    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+    (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
 };
 const controlAddBookMark = ()=>{
     _modelJs.addBookmark(_modelJs.state.recipe);
@@ -2585,7 +2585,7 @@ class View {
     }
     update(data) {
         //error handling
-        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
+        // if(!data || (Array.isArray(data) && data.length === 0) ) return this.renderError();
         this._data = data;
         const newMarkUp = this._generateMarkup();
         const newDOM = document.createRange().createContextualFragment(newMarkUp);
@@ -2596,8 +2596,8 @@ class View {
             //updates changed text
             if (!newEl.isEqualNode(curEl) && newEl.firstChild.nodeValue.trim() !== "") curEl.textContent = newEl.textContent;
             //updates changed attributes
-            if (!newEl.isEqualNode.curEl) Array.from(newEl.attributes).forEach((attr)=>{
-                curEl.setAttribute(attr.value, attr.name);
+            if (!newEl.isEqualNode(curEl)) Array.from(newEl.attributes).forEach((attr)=>{
+                curEl.setAttribute(attr.name, attr.value);
             });
         });
     }

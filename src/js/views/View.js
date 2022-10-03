@@ -14,7 +14,7 @@ export default class View{
 
     update(data){
        //error handling
-    if(!data || (Array.isArray(data) && data.length === 0) ) return this.renderError();
+    // if(!data || (Array.isArray(data) && data.length === 0) ) return this.renderError();
 
     this._data = data;
     const newMarkUp = this._generateMarkup();
@@ -33,9 +33,9 @@ export default class View{
 
     //updates changed attributes
 
-    if(!newEl.isEqualNode.curEl){
+    if(!newEl.isEqualNode(curEl)){
       Array.from(newEl.attributes).forEach( attr => {
-        curEl.setAttribute(attr.value,attr.name)
+        curEl.setAttribute(attr.name, attr.value)
       })
     }
 
