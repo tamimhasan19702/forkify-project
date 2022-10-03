@@ -592,21 +592,10 @@ const controlPagination = function(goToPage) {
     //render initial pagination
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
-<<<<<<< HEAD
-<<<<<<< HEAD
-const controlServings = function(newServings) {
-    _modelJs.updateServings(newServings);
-=======
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
 const controlServings = (newServings)=>{
     //servings update
     _modelJs.updateServings(newServings);
     //recipe view render
-<<<<<<< HEAD
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
     (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
 const init = ()=>{
@@ -1799,15 +1788,7 @@ const getSearchResultsPerPage = (page = state.search.page)=>{
     const end = page * state.search.resultsPerPage;
     return state.search.results.slice(start, end);
 };
-<<<<<<< HEAD
-<<<<<<< HEAD
 const updateServings = function(newServings) {
-=======
-const updateServings = (newServings)=>{
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-=======
-const updateServings = (newServings)=>{
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
     state.recipe.ingredients.forEach((ing)=>{
         ing.quantity = ing.quantity * newServings / state.recipe.servings;
     });
@@ -2468,25 +2449,11 @@ class recipeView extends (0, _viewDefault.default) {
     }
     addHandlerUpdateServings(handler) {
         this._parentElement.addEventListener("click", function(e) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            const btn = e.target.closest(".btn-tiny");
-            if (!btn) return;
-            console.log(btn);
-            const updateTo = +btn.dataset.updateTo;
-            if (updateTo > 0) handler(updateTo);
-=======
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
             const btn = e.target.closest(".btn-update-servings");
             if (!btn) return;
             console.log("btn");
             const { updateTo  } = btn.dataset;
             if (+updateTo > 0) handler(+updateTo);
-<<<<<<< HEAD
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
         });
     }
     _generateMarkup() {
