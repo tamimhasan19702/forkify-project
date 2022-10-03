@@ -600,12 +600,14 @@ const controlServings = (newServings)=>{
 };
 const controlAddBookMark = ()=>{
     _modelJs.addBookmark(_modelJs.state.recipe);
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
 };
 const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
     (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings);
+    (0, _recipeViewJsDefault.default).addHandlerBookmark(controlAddBookMark);
 };
 init();
 
@@ -2466,7 +2468,7 @@ class recipeView extends (0, _viewDefault.default) {
             if (+updateTo > 0) handler(+updateTo);
         });
     }
-    addHandleraddBookmark(handler) {
+    addHandlerBookmark(handler) {
         this._parentElement.addEventListener("click", function(e) {
             const btn = e.target.closest(".btn-bookmark");
             if (!btn) return;
@@ -2517,7 +2519,7 @@ class recipeView extends (0, _viewDefault.default) {
      </div>
      <button class="btn-round btn-bookmark">
      <svg>
-        <use href="${0, _iconsSvgDefault.default}#icon-bookmark"></use>
+        <use href="${0, _iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? "-fill" : ""}"></use>
      </svg>
      </button>
      </div>

@@ -22,7 +22,7 @@ class recipeView extends View {
       })
     }
     
-    addHandleraddBookmark(handler){
+    addHandlerBookmark(handler){
       this._parentElement.addEventListener('click',function(e){
         const btn = e.target.closest('.btn-bookmark');
         if(!btn) return
@@ -74,7 +74,7 @@ class recipeView extends View {
      </div>
      <button class="btn-round btn-bookmark">
      <svg>
-        <use href="${icons}#icon-bookmark"></use>
+        <use href="${icons}#icon-bookmark${this._data.bookmarked ? '-fill' : ''}"></use>
      </svg>
      </button>
      </div>

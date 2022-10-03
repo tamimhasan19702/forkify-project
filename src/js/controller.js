@@ -96,12 +96,14 @@ const controlServings= (newServings) => {
 
 const controlAddBookMark = () => {
   model.addBookmark(model.state.recipe)
+  recipeView.render(model.state.recipe)
 }
 
 const init  = () => {
  recipeView.addHandlerRender(controlRecipes);
  searchView.addHandlerSearch(controlSearchResults);
  paginationView.addHandlerClick(controlPagination);
- recipeView.addHandlerUpdateServings(controlServings)
+ recipeView.addHandlerUpdateServings(controlServings);
+ recipeView.addHandlerBookmark(controlAddBookMark);
   }
   init()
