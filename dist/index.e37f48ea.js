@@ -583,7 +583,6 @@ const controlSearchResults = async function() {
         //load search results
         await _modelJs.loadSearchResults(query);
         //render search results
-        console.log(_modelJs.state.search.results);
         //  resultsView.render(model.state.search.results);
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
         //render initial pagination
@@ -593,7 +592,6 @@ const controlSearchResults = async function() {
     }
 };
 const controlPagination = function(goToPage) {
-    console.log("page controller");
     //  resultsView.render(model.state.search.results);
     (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage(goToPage));
     //render initial pagination
@@ -1789,7 +1787,6 @@ const loadSearchResults = async function(query) {
     try {
         state.search.query = query;
         const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}?search=${query}`);
-        console.log(data);
         state.search.results = data.data.recipes.map((rec)=>{
             return {
                 id: rec.id,
@@ -2482,7 +2479,6 @@ class recipeView extends (0, _viewDefault.default) {
         this._parentElement.addEventListener("click", function(e) {
             const btn = e.target.closest(".btn-update-servings");
             if (!btn) return;
-            console.log("btn");
             const { updateTo  } = btn.dataset;
             if (+updateTo > 0) handler(+updateTo);
         });
@@ -2992,7 +2988,6 @@ class resultsView extends (0, _viewDefault.default) {
     _errorMessage = `No recipes found according to your query. Please try again ;) `;
     _Message = ``;
     _generateMarkup() {
-        console.log(this._data);
         return this._data.map((result)=>(0, _previewViewDefault.default).render(result, false)).join();
     }
 }
@@ -3046,7 +3041,6 @@ class paginationView extends (0, _viewDefault.default) {
     _generateMarkup() {
         const curPage = this._data.page;
         const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
-        console.log(numPages);
         //page 1 and there are other pages available 
         if (curPage === 1 && numPages > 1) return `
             <button data-goto="${curPage + 1}" class="btn-inline pagination-btn-next">
@@ -3100,7 +3094,6 @@ class bookmarksView extends (0, _viewDefault.default) {
     _errorMessage = `No bookmark yet. Find a nice recipe and bookmark it 😃 `;
     _Message = ``;
     _generateMarkup() {
-        console.log(this._data);
         return this._data.map((bookmark)=>(0, _previewViewDefault.default).render(bookmark, false)).join();
     }
 }

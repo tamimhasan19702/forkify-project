@@ -16,7 +16,6 @@ class recipeView extends View {
       this._parentElement.addEventListener('click',function(e){
         const btn = e.target.closest('.btn-update-servings');
         if(!btn) return;
-        console.log('btn')
         const {updateTo} = btn.dataset
         if(+updateTo > 0) handler(+updateTo);
       })
