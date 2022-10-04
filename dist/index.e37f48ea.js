@@ -2588,11 +2588,12 @@ var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
     _data;
-    render(data) {
+    render(data, render = true) {
         //error handling
         if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const markUp = this._generateMarkup();
+        if (!render) markUp;
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markUp);
     }
@@ -3074,32 +3075,46 @@ var _view = require("./View");
 var _viewDefault = parcelHelpers.interopDefault(_view);
 var _iconsSvg = require("../../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+var _previewView = require("./previewView");
+var _previewViewDefault = parcelHelpers.interopDefault(_previewView);
 class bookmarksView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector(".bookmarks-list");
     _errorMessage = `No bookmark yet. Find a nice recipe and bookmark it 😃 `;
     _Message = ``;
     _generateMarkup() {
         console.log(this._data);
-        return this._data.map(this._generateMarkupPreview).join();
+        return this._data.map((bookmark)=>(0, _previewViewDefault.default).render(bookmark, false)).join();
     }
-    _generateMarkupPreview(result) {
+}
+exports.default = new bookmarksView();
+
+},{"./View":"5cUXS","../../../img/icons.svg":"g7Cgm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./previewView":"1FDQ6"}],"1FDQ6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+var _iconsSvg = require("../../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+class previewView extends (0, _viewDefault.default) {
+    _parentElement = "";
+    _generateMarkup() {
         const id = window.location.hash.slice(1);
         return `
     <li class="preview">
-    <a href="#${result.id}" class="preview-link ${result.id === id ? "preview-link-active" : ""}">
+    <a href="#${this._data.id}" class="preview-link ${this._data.id === id ? "preview-link-active" : ""}">
         <figure class="preview-fig">
-            <img src="${result.image}" alt="${result.title}">
+            <img src="${this._data.image}" alt="${this._data.title}">
         </figure>
         <div class="preview-data">
-            <h4 class="preview-title">${result.title} </h4>
-            <p class="preview-publisher">${result.publisher}</p>
+            <h4 class="preview-title">${this._data.title} </h4>
+            <p class="preview-publisher">${this._data.publisher}</p>
         </div>
     </a>
     </li>   
     `;
     }
 }
-exports.default = new bookmarksView();
+exports.default = new previewView();
 
 },{"./View":"5cUXS","../../../img/icons.svg":"g7Cgm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire6c34")
 
