@@ -3146,6 +3146,10 @@ class addRecipeView extends (0, _viewDefault.default) {
     _addHandlerShowWindow() {
         this._btnOpen.addEventListener("click", this._toggleWindow.bind(this));
     }
+    _addHandlerHideWindow() {
+        this._btnClose.addEventListener("click", this._toggleWindow.bind(this));
+        this._overlay.addEventListener("click", this._toggleWindow.bind(this));
+    }
     _generateMarkup() {}
 }
 exports.default = new addRecipeView();
