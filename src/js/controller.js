@@ -5,15 +5,16 @@ import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarkView from './views/bookmarkView.js';
+import previewView from './views/previewView.js';
 //import icons
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
-if(module.hot){
-  module.hot.accept();
-}
+// if(module.hot){
+//   module.hot.accept();
+// }
 
 
  //api - https://forkify-api.herokuapp.com/v2
@@ -31,7 +32,7 @@ try{
 
  //update results view to mark selected search results
 
- resultsView.render(model.getSearchResultsPerPage());
+ resultsView.update(model.getSearchResultsPerPage());
  bookmarkView.update(model.state.bookmarks);
 
 //loading recipe
