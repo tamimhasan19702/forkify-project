@@ -6,6 +6,7 @@ import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarkView from './views/bookmarkView.js';
 import previewView from './views/previewView.js';
+import addRecipeView from './views/addRecipeView.js';
 //import icons
 
 import 'core-js/stable';
