@@ -558,6 +558,7 @@ const controlRecipes = async function() {
         (0, _recipeViewJsDefault.default).renderSpinner();
         //update results view to mark selected search results
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPerPage());
+        (0, _bookmarkViewJsDefault.default).update(_modelJs.state.bookmarks);
         //loading recipe
         await _modelJs.loadRecipe(id);
         const { recipe  } = _modelJs.state;
@@ -604,16 +605,16 @@ const controlAddBookMark = ()=>{
     //Add and remove bookmark
     if (!_modelJs.state.recipe.bookmarked) _modelJs.addBookmark(_modelJs.state.recipe);
     else _modelJs.deleteBookmark(_modelJs.state.recipe.id);
-    // update recipeview
+    // update recipe view
     (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
 const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
-    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
-    (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
     (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings);
     (0, _recipeViewJsDefault.default).addHandlerBookmark(controlAddBookMark);
+    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
+    (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
 init();
 

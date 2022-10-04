@@ -32,6 +32,7 @@ try{
  //update results view to mark selected search results
 
  resultsView.render(model.getSearchResultsPerPage());
+ bookmarkView.update(model.state.bookmarks);
 
 //loading recipe
 await model.loadRecipe(id);
@@ -101,7 +102,7 @@ const controlAddBookMark = () => {
   else model.deleteBookmark(model.state.recipe.id);
 
 
-  // update recipeview
+  // update recipe view
   recipeView.update(model.state.recipe);
 
   bookmarkView.render(model.state.bookmarks);
@@ -109,9 +110,10 @@ const controlAddBookMark = () => {
 
 const init  = () => {
  recipeView.addHandlerRender(controlRecipes);
- searchView.addHandlerSearch(controlSearchResults);
- paginationView.addHandlerClick(controlPagination);
  recipeView.addHandlerUpdateServings(controlServings);
  recipeView.addHandlerBookmark(controlAddBookMark);
+ searchView.addHandlerSearch(controlSearchResults);
+ paginationView.addHandlerClick(controlPagination);
+
   }
   init()
