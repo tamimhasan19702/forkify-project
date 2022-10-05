@@ -616,6 +616,9 @@ const controlAddBookMark = ()=>{
 const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
+const controlAddRecipe = (newRecipe)=>{
+    console.log(newRecipe);
+};
 const init = ()=>{
     (0, _bookmarkViewJsDefault.default).addHandlerRender(controlBookmarks);
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
@@ -623,6 +626,7 @@ const init = ()=>{
     (0, _recipeViewJsDefault.default).addHandlerBookmark(controlAddBookMark);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
+    (0, _addRecipeViewJsDefault.default).addHandlerUpload(controlAddRecipe);
 };
 init();
 
@@ -3122,7 +3126,7 @@ class bookmarksView extends (0, _viewDefault.default) {
 }
 exports.default = new bookmarksView();
 
-},{"./View":"5cUXS","../../../img/icons.svg":"g7Cgm","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./previewView":"1FDQ6"}],"i6DNj":[function(require,module,exports) {
+},{"./View":"5cUXS","../../../img/icons.svg":"g7Cgm","./previewView":"1FDQ6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i6DNj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./View");
@@ -3150,6 +3154,14 @@ class addRecipeView extends (0, _viewDefault.default) {
     _addHandlerHideWindow() {
         this._btnClose.addEventListener("click", this._toggleWindow.bind(this));
         this._overlay.addEventListener("click", this._toggleWindow.bind(this));
+    }
+    addHandlerUpload(e) {
+        this._parentElement.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            const data = [
+                ...new FormData(this)
+            ];
+        });
     }
     _generateMarkup() {}
 }
