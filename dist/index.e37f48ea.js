@@ -1849,7 +1849,7 @@ const clearBookmarks = function() {
 const uploadRecipe = async (newRecipe)=>{
     console.log(Object.entries(newRecipe));
     const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("ingredient") && entry[1] !== "").map((ing)=>{
-        const [quantity, unit, description] = ing.replaceAll(" ", "").split(",");
+        const [quantity, unit, description] = ing[1].replaceAll(" ", "").split(",");
         return {
             quantity,
             unit,
@@ -3168,7 +3168,7 @@ class addRecipeView extends (0, _viewDefault.default) {
         this._overlay.addEventListener("click", this._toggleWindow.bind(this));
     }
     addHandlerUpload(handler) {
-        this._parentElement.addEventListener("submit", (e)=>{
+        this._parentElement.addEventListener("submit", function(e) {
             e.preventDefault();
             const dataArr = [
                 ...new FormData(this)
