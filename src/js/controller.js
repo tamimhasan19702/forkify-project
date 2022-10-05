@@ -4,15 +4,18 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
+import bookmarkView from './views/bookmarkView.js';
+import previewView from './views/previewView.js';
+import addRecipeView from './views/addRecipeView.js';
 //import icons
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
 
-if(module.hot){
-  module.hot.accept();
-}
+// if(module.hot){
+//   module.hot.accept();
+// }
 
 
  //api - https://forkify-api.herokuapp.com/v2
@@ -30,7 +33,8 @@ try{
 
  //update results view to mark selected search results
 
- resultsView.render(model.getSearchResultsPerPage());
+ resultsView.update(model.getSearchResultsPerPage());
+ bookmarkView.update(model.state.bookmarks);
 
 //loading recipe
 await model.loadRecipe(id);
@@ -59,7 +63,6 @@ const controlSearchResults = async function(){
    await model.loadSearchResults(query)
 
    //render search results
-   console.log(model.state.search.results)
   //  resultsView.render(model.state.search.results);
   resultsView.render(model.getSearchResultsPerPage())
   //render initial pagination
@@ -75,7 +78,6 @@ const controlSearchResults = async function(){
 
 
 const controlPagination = function(goToPage){
-  console.log('page controller');
   //  resultsView.render(model.state.search.results);
   resultsView.render(model.getSearchResultsPerPage(goToPage))
   //render initial pagination
@@ -83,35 +85,44 @@ const controlPagination = function(goToPage){
   paginationView.render(model.state.search);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-const controlServings = function(newServings){
-  model.updateServings(newServings);
-
-  recipeView.render(model.state.recipe);
-}
 
 
-
-=======
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
 const controlServings= (newServings) => {
   //servings update
    model.updateServings(newServings)
 
    //recipe view render
-   recipeView.render(model.state.recipe)
+   recipeView.update(model.state.recipe)
 }
-<<<<<<< HEAD
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
-=======
->>>>>>> adffb84040f82e9adf8c69f3c35ed14cc8f5a6bb
+
+
+const controlAddBookMark = () => {
+  //Add and remove bookmark
+  if(!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+
+
+  // update recipe view
+  recipeView.update(model.state.recipe);
+
+  bookmarkView.render(model.state.bookmarks);
+}
+
+const controlBookmarks = () => {
+  bookmarkView.render(model.state.bookmarks);
+}
+
+const controlAddRecipe = (newRecipe) => {
+console.log(newRecipe)
+}
 
 const init  = () => {
+ bookmarkView.addHandlerRender(controlBookmarks); 
  recipeView.addHandlerRender(controlRecipes);
+ recipeView.addHandlerUpdateServings(controlServings);
+ recipeView.addHandlerBookmark(controlAddBookMark);
  searchView.addHandlerSearch(controlSearchResults);
  paginationView.addHandlerClick(controlPagination);
- recipeView.addHandlerUpdateServings(controlServings)
+ addRecipeView.addHandlerUpload(controlAddRecipe);
   }
   init()
