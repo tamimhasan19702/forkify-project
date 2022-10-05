@@ -6,6 +6,7 @@ import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarkView from './views/bookmarkView.js';
 import previewView from './views/previewView.js';
+import addRecipeView from './views/addRecipeView.js';
 //import icons
 
 import 'core-js/stable';
@@ -111,6 +112,10 @@ const controlBookmarks = () => {
   bookmarkView.render(model.state.bookmarks);
 }
 
+const controlAddRecipe = (newRecipe) => {
+console.log(newRecipe)
+}
+
 const init  = () => {
  bookmarkView.addHandlerRender(controlBookmarks); 
  recipeView.addHandlerRender(controlRecipes);
@@ -118,6 +123,6 @@ const init  = () => {
  recipeView.addHandlerBookmark(controlAddBookMark);
  searchView.addHandlerSearch(controlSearchResults);
  paginationView.addHandlerClick(controlPagination);
-
+ addRecipeView.addHandlerUpload(controlAddRecipe);
   }
   init()
