@@ -617,7 +617,13 @@ const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
 const controlAddRecipe = (newRecipe)=>{
-    console.log(newRecipe);
+    try {
+        _modelJs.uploadRecipe(newRecipe);
+        console.log(newRecipe);
+    } catch (err) {
+        error(err);
+        (0, _addRecipeViewJsDefault.default).renderError();
+    }
 };
 const init = ()=>{
     (0, _bookmarkViewJsDefault.default).addHandlerRender(controlBookmarks);
