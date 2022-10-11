@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime"
-import { API_URL, RES_PER_PAGE } from "../config"
-import { getJSON } from "../helper"
+import { API_URL, RES_PER_PAGE, KEY } from "../config"
+import { getJSON , sendJSON } from "../helper"
 
 export const state = {
     recipe: {},
@@ -137,5 +137,7 @@ const recipe = {
   servings: +newRecipe.servings,
   ingredients
 }
+
+sendJSON(`${API_URL}?key=`)
 
 };
