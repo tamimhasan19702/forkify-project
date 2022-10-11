@@ -616,13 +616,13 @@ const controlAddBookMark = ()=>{
 const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = (newRecipe)=>{
+const controlAddRecipe = async (newRecipe)=>{
     try {
-        _modelJs.uploadRecipe(newRecipe);
-        console.log(newRecipe);
+        //upload the new recipe data
+        await _modelJs.uploadRecipe(newRecipe);
     } catch (err) {
-        error(err);
-        (0, _addRecipeViewJsDefault.default).renderError();
+        console.error(err);
+        (0, _addRecipeViewJsDefault.default).renderError(err.message);
     }
 };
 const init = ()=>{
@@ -1766,7 +1766,6 @@ parcelHelpers.export(exports, "getSearchResultsPerPage", ()=>getSearchResultsPer
 parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 parcelHelpers.export(exports, "addBookmark", ()=>addBookmark);
 parcelHelpers.export(exports, "deleteBookmark", ()=>deleteBookmark);
-parcelHelpers.export(exports, "uploadRecipe", ()=>uploadRecipe);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("../config");
 var _helper = require("../helper");
@@ -1851,21 +1850,8 @@ const init = function() {
 init();
 const clearBookmarks = function() {
     localStorage.clear("bookmarks");
-};
-const uploadRecipe = async (newRecipe)=>{
-    console.log(Object.entries(newRecipe));
-    const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("ingredient") && entry[1] !== "").map((ing)=>{
-        const ingArr = ing[1].replaceAll(" ", "").split(",");
-        const [quantity, unit, description] = ingArr;
-        if (ingArr.length !== 3) throw new Error(`Wrong ingredient formate!! please use the right formate`);
-        return {
-            quantity: quantity ? +quantity : null,
-            unit,
-            description
-        };
-    });
-    console.log(ingredients);
-};
+} //clearBookmarks();
+;
 
 },{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
 /**
