@@ -616,10 +616,10 @@ const controlAddBookMark = ()=>{
 const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = function(newRecipe) {
+const controlAddRecipe = async function(newRecipe) {
     try {
         // upload the new recipe data  
-        _modelJs.uploadRecipe(newRecipe);
+        await _modelJs.uploadRecipe(newRecipe);
     } catch (err) {
         console.error(err);
         (0, _addRecipeViewJsDefault.default).renderError(err.message);
