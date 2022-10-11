@@ -127,4 +127,15 @@ export const uploadRecipe = async function(newRecipe){
 }catch(err){
   throw(err);
 }
+
+const recipe = {
+  title: newRecipe.title,
+  source_url: newRecipe.sourceUrl,
+  image_url: newRecipe.image,
+  publisher: newRecipe.publisher,
+  cooking_time: +newRecipe.cookingTime,
+  servings: +newRecipe.servings,
+  ingredients
+}
+
 };
