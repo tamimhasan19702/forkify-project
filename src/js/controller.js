@@ -112,8 +112,11 @@ const controlBookmarks = () => {
   bookmarkView.render(model.state.bookmarks);
 }
 
-const controlAddRecipe = (newRecipe) => {
-console.log(newRecipe)
+const controlAddRecipe = function(newRecipe) {
+
+  // upload the new recipe data
+
+  model.uploadRecipe(newRecipe);
 }
 
 const init  = () => {

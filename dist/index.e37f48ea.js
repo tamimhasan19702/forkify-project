@@ -616,8 +616,9 @@ const controlAddBookMark = ()=>{
 const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = (newRecipe)=>{
-    console.log(newRecipe);
+const controlAddRecipe = function(newRecipe) {
+    // upload the new recipe data
+    _modelJs.uploadRecipe(newRecipe);
 };
 const init = ()=>{
     (0, _bookmarkViewJsDefault.default).addHandlerRender(controlBookmarks);
@@ -1846,13 +1847,11 @@ init();
 const clearBookmarks = function() {
     localStorage.clear("bookmarks");
 };
-const uploadRecipe = async (newRecipe)=>{
-    console.log(Object.entries(newRecipe));
-    const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("ingredient") && entry[1] !== "").map((ing)=>{
-        const ingArr = ing[1].replaceAll(" ", "").split(",");
-        const [quantity, unit, description] = ingArr;
+const uploadRecipe = async function(newRecipe) {
+    const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ing)=>{
+        const [quantity, unit, description] = ing[1].replaceAll(" ", "").split(",");
         return {
-            quantity: quantity ? +quantity : null,
+            quantity,
             unit,
             description
         };
