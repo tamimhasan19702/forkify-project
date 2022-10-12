@@ -112,12 +112,11 @@ const controlBookmarks = () => {
   bookmarkView.render(model.state.bookmarks);
 }
 
-const controlAddRecipe = function(newRecipe) {
+const controlAddRecipe = (newRecipe) => {
 
-  // upload the new recipe data
-
-  model.uploadRecipe(newRecipe);
+  model.uploadRecipe(newRecipe)
 }
+
 
 const init  = () => {
  bookmarkView.addHandlerRender(controlBookmarks); 
