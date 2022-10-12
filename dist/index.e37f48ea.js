@@ -616,15 +616,6 @@ const controlAddBookMark = ()=>{
 const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = async function(newRecipe) {
-    try {
-        // upload the new recipe data  
-        await _modelJs.uploadRecipe(newRecipe);
-    } catch (err) {
-        console.error(err);
-        (0, _addRecipeViewJsDefault.default).renderError(err.message);
-    }
-};
 const init = ()=>{
     (0, _bookmarkViewJsDefault.default).addHandlerRender(controlBookmarks);
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
@@ -1766,7 +1757,6 @@ parcelHelpers.export(exports, "getSearchResultsPerPage", ()=>getSearchResultsPer
 parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 parcelHelpers.export(exports, "addBookmark", ()=>addBookmark);
 parcelHelpers.export(exports, "deleteBookmark", ()=>deleteBookmark);
-parcelHelpers.export(exports, "uploadRecipe", ()=>uploadRecipe);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("../config");
 var _helper = require("../helper");
@@ -1851,34 +1841,8 @@ const init = function() {
 init();
 const clearBookmarks = function() {
     localStorage.clear("bookmarks");
-};
-const uploadRecipe = async function(newRecipe) {
-    try {
-        const ingredients1 = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ing)=>{
-            const ingArr = ing[1].replaceAll(" ", "").split(",");
-            if (ingArr.length !== 3) throw new Error("Wrong ingredient format!! Please Use the correct format");
-            const [quantity, unit, description] = ingArr;
-            return {
-                quantity: quantity ? +quantity : null,
-                unit,
-                description
-            };
-        });
-        console.log(ingredients1);
-    } catch (err) {
-        throw err;
-    }
-    const recipe = {
-        title: newRecipe.title,
-        source_url: newRecipe.sourceUrl,
-        image_url: newRecipe.image,
-        publisher: newRecipe.publisher,
-        cooking_time: +newRecipe.cookingTime,
-        servings: +newRecipe.servings,
-        ingredients
-    };
-    (0, _helper.sendJSON)(`${(0, _config.API_URL)}?key=`);
-};
+} //clearBookmarks();
+;
 
 },{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
 /**
