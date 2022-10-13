@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime"
-import { API_URL, RES_PER_PAGE } from "../config"
-import { getJSON } from "../helper"
+import { API_URL, RES_PER_PAGE, KEY } from "../config"
+import { getJSON , sendJSON } from "../helper"
 
 export const state = {
     recipe: {},
@@ -115,18 +115,14 @@ const clearBookmarks = function(){
 
 //clearBookmarks();
 
-export const uploadRecipe = async newRecipe => {
- console.log(Object.entries(newRecipe));
- const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '').map(ing => {
-  const ingArr = ing[1].replaceAll(' ', '').split(',');
-
-  if()
-  const [quantity,unit,description] = ingArr
-   
-
-  return {quantity: quantity ? +quantity:null ,unit,description};
- });
-
- console.log(ingredients);
-
-} 
+export const uploadRecipe = async function(newRecipe){
+  console.log(Object.entries(newRecipe));
+  const ingredients = Object.entries(newRecipe).filter( entry => entry[0].startsWith('Ingredient') && entry[1] !== '')
+  .map(ing => {
+  const [quantity,unit,description] = ing[1]
+  .replaceAll(' ','')
+  .split(',');
+  return {quantity,unit,description};
+  })
+  console.log(ingredients);
+}
