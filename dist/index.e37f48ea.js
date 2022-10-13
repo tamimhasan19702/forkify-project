@@ -654,7 +654,11 @@ init();
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarkView.js":"7YaI3","./views/previewView.js":"1FDQ6","./views/addRecipeView.js":"i6DNj","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs"}],"49tUX":[function(require,module,exports) {
+=======
+},{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarkView.js":"7YaI3","./views/previewView.js":"1FDQ6","./views/addRecipeView.js":"i6DNj","./config.js":"k5Hzs","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
+>>>>>>> be5b7d151ede041a862dcb0872a4d5939dc01fef
 =======
 },{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarkView.js":"7YaI3","./views/previewView.js":"1FDQ6","./views/addRecipeView.js":"i6DNj","./config.js":"k5Hzs","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 >>>>>>> be5b7d151ede041a862dcb0872a4d5939dc01fef
@@ -2598,7 +2602,11 @@ export const sendJSON = async function(url,uploadData){
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ"}],"l60JC":[function(require,module,exports) {
+=======
+},{"regenerator-runtime":"dXNgZ","./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+>>>>>>> be5b7d151ede041a862dcb0872a4d5939dc01fef
 =======
 },{"regenerator-runtime":"dXNgZ","./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
 >>>>>>> be5b7d151ede041a862dcb0872a4d5939dc01fef
