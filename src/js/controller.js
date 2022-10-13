@@ -113,8 +113,11 @@ const controlBookmarks = () => {
 }
 
 const controlAddRecipe = (newRecipe) => {
-
+  try{
   model.uploadRecipe(newRecipe)
+}catch(err){
+  addRecipeView.renderError(err.message);
+}
 }
 
 

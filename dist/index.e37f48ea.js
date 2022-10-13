@@ -617,7 +617,11 @@ const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
 const controlAddRecipe = (newRecipe)=>{
-    _modelJs.uploadRecipe(newRecipe);
+    try {
+        _modelJs.uploadRecipe(newRecipe);
+    } catch (err) {
+        (0, _addRecipeViewJsDefault.default).renderError(err.message);
+    }
 };
 const init = ()=>{
     (0, _bookmarkViewJsDefault.default).addHandlerRender(controlBookmarks);
@@ -1777,16 +1781,16 @@ const state = {
 const loadRecipe = async function(id) {
     try {
         const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}/${id}`);
-        const { recipe  } = data.data;
+        const { recipe: recipe1  } = data.data;
         state.recipe = {
-            id: recipe.id,
-            title: recipe.title,
-            publisher: recipe.publisher,
-            sourceUrl: recipe.source_url,
-            image: recipe.image_url,
-            servings: recipe.servings,
-            cookingTime: recipe.cooking_time,
-            ingredients: recipe.ingredients
+            id: recipe1.id,
+            title: recipe1.title,
+            publisher: recipe1.publisher,
+            sourceUrl: recipe1.source_url,
+            image: recipe1.image_url,
+            servings: recipe1.servings,
+            cookingTime: recipe1.cooking_time,
+            ingredients: recipe1.ingredients
         };
         if (state.bookmarks.some((bookmark)=>bookmark.id === id)) state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
@@ -1827,9 +1831,9 @@ const updateServings = function(newServings) {
 const persistBookmarks = function() {
     localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 };
-const addBookmark = function(recipe) {
-    state.bookmarks.push(recipe);
-    if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+const addBookmark = function(recipe1) {
+    state.bookmarks.push(recipe1);
+    if (recipe1.id === state.recipe.id) state.recipe.bookmarked = true;
     persistBookmarks();
 };
 const deleteBookmark = function(id) {
@@ -1847,16 +1851,24 @@ const clearBookmarks = function() {
     localStorage.clear("bookmarks");
 };
 const uploadRecipe = async function(newRecipe) {
-    console.log(Object.entries(newRecipe));
-    const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ing)=>{
-        const [quantity, unit, description] = ing[1].replaceAll(" ", "").split(",");
-        return {
-            quantity,
-            unit,
-            description
-        };
-    });
-    console.log(ingredients);
+    try {
+        console.log(Object.entries(newRecipe));
+        const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ing)=>{
+            const ingArr = ing[1].replaceAll(" ", "").split(",");
+            if (ingArr.length !== 3) throw new Error("Wrong Ingredient format!! Please enter the correct one!!");
+            const [quantity, unit, description] = ingArr;
+            return {
+                quantity: quantity ? +quantity : null,
+                unit,
+                description
+            };
+        });
+        console.log(ingredients);
+        const data = (0, _helper.sendJSON)(`${(0, _config.API_URL)}?key=${(0, _config.KEY)}`, recipe);
+        console.log(data);
+    } catch (err) {
+        throw err;
+    }
 };
 
 },{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
