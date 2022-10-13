@@ -7,6 +7,7 @@ import paginationView from './views/paginationView.js';
 import bookmarkView from './views/bookmarkView.js';
 import previewView from './views/previewView.js';
 import addRecipeView from './views/addRecipeView.js';
+import { MODEL_CLOSE_SEC } from './config.js';
 //import icons
 
 import 'core-js/stable';
@@ -114,8 +115,22 @@ const controlBookmarks = () => {
 
 const controlAddRecipe = (newRecipe) => {
   try{
+
+  //upload new recipe data  
   model.uploadRecipe(newRecipe)
   console.log(model.state.recipe)
+
+  //render.recipe
+  recipeView.render(model.state.recipe);
+
+  //render success
+  addRecipeView.renderSuccess();
+
+  //close form function
+  setTimeout(function(){
+    addRecipeView._toggleWindow()
+  },MODEL_CLOSE_SEC*1000);
+
 }catch(err){
   addRecipeView.renderError(err.message);
 }

@@ -618,8 +618,15 @@ const controlBookmarks = ()=>{
 };
 const controlAddRecipe = (newRecipe)=>{
     try {
+        //upload new recipe data  
         _modelJs.uploadRecipe(newRecipe);
         console.log(_modelJs.state.recipe);
+        //render.recipe
+        (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+        //close form function
+        setTimeout(function() {
+            (0, _addRecipeViewJsDefault.default)._toggleWindow();
+        }, 2500);
     } catch (err) {
         (0, _addRecipeViewJsDefault.default).renderError(err.message);
     }
