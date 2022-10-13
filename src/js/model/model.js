@@ -25,7 +25,7 @@ const createRecipeObject = function (data){
   servings: recipe.servings,
   cookingTime: recipe.cooking_time,
   ingredients: recipe.ingredients,
-  ...(recipe.key && {key: recipe.key})
+  ...(recipe.key && {key: recipe.key}),
 }
 }
 
@@ -60,6 +60,7 @@ export const loadSearchResults = async function(query){
       title: rec.title,
       publisher: rec.publisher,
       image: rec.image_url,
+      ...(rec.key && {key: rec.key}),
     };
   });
   state.search.page = 1;
