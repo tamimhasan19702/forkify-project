@@ -1781,16 +1781,16 @@ const state = {
 const loadRecipe = async function(id) {
     try {
         const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}/${id}`);
-        const { recipe: recipe1  } = data.data;
+        const { recipe  } = data.data;
         state.recipe = {
-            id: recipe1.id,
-            title: recipe1.title,
-            publisher: recipe1.publisher,
-            sourceUrl: recipe1.source_url,
-            image: recipe1.image_url,
-            servings: recipe1.servings,
-            cookingTime: recipe1.cooking_time,
-            ingredients: recipe1.ingredients
+            id: recipe.id,
+            title: recipe.title,
+            publisher: recipe.publisher,
+            sourceUrl: recipe.source_url,
+            image: recipe.image_url,
+            servings: recipe.servings,
+            cookingTime: recipe.cooking_time,
+            ingredients: recipe.ingredients
         };
         if (state.bookmarks.some((bookmark)=>bookmark.id === id)) state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
@@ -1831,9 +1831,9 @@ const updateServings = function(newServings) {
 const persistBookmarks = function() {
     localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 };
-const addBookmark = function(recipe1) {
-    state.bookmarks.push(recipe1);
-    if (recipe1.id === state.recipe.id) state.recipe.bookmarked = true;
+const addBookmark = function(recipe) {
+    state.bookmarks.push(recipe);
+    if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
     persistBookmarks();
 };
 const deleteBookmark = function(id) {
@@ -1863,7 +1863,16 @@ const uploadRecipe = async function(newRecipe) {
                 description
             };
         });
-        console.log(ingredients);
+        console.log(recipe);
+        const recipe = {
+            title: newRecipe.title,
+            source_url: newRecipe.sourceUrl,
+            image_url: newRecipe.image,
+            publisher: newRecipe.publisher,
+            cooking_time: +newRecipe.cookingTime,
+            servings: +newRecipe.servings,
+            ingredients
+        };
         const data = (0, _helper.sendJSON)(`${(0, _config.API_URL)}?key=${(0, _config.KEY)}`, recipe);
         console.log(data);
     } catch (err) {
