@@ -125,8 +125,9 @@ export const uploadRecipe = async function(newRecipe){
   console.log(Object.entries(newRecipe));
   const ingredients = Object.entries(newRecipe)
   .filter( entry => entry[0].startsWith('Ingredient') && entry[1] !== '')
-  .map(ing => {
-   const ingArr = ing[1]
+  .map(ingd => {
+   
+  const ingArr = ingd[1]
    .replaceAll(' ','')
    .split(',');
   

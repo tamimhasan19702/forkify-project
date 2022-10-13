@@ -549,6 +549,7 @@ var _previewViewJs = require("./views/previewView.js");
 var _previewViewJsDefault = parcelHelpers.interopDefault(_previewViewJs);
 var _addRecipeViewJs = require("./views/addRecipeView.js");
 var _addRecipeViewJsDefault = parcelHelpers.interopDefault(_addRecipeViewJs);
+var _configJs = require("./config.js");
 var _runtime = require("regenerator-runtime/runtime");
 var _regeneratorRuntime = require("regenerator-runtime");
 // if(module.hot){
@@ -616,18 +617,21 @@ const controlAddBookMark = ()=>{
 const controlBookmarks = ()=>{
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = (newRecipe)=>{
+const controlAddRecipe = async (newRecipe)=>{
     try {
         //upload new recipe data  
-        _modelJs.uploadRecipe(newRecipe);
+        await _modelJs.uploadRecipe(newRecipe);
         console.log(_modelJs.state.recipe);
         //render.recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+        //success message
+        (0, _addRecipeViewJsDefault.default).renderSuccess();
         //close form function
         setTimeout(function() {
             (0, _addRecipeViewJsDefault.default)._toggleWindow();
-        }, 2500);
+        }, (0, _configJs.MODEL_CLOSE_SEC) * 1000);
     } catch (err) {
+        console.log(err);
         (0, _addRecipeViewJsDefault.default).renderError(err.message);
     }
 };
@@ -642,7 +646,7 @@ const init = ()=>{
 };
 init();
 
-},{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarkView.js":"7YaI3","./views/previewView.js":"1FDQ6","./views/addRecipeView.js":"i6DNj","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./model/model.js":"gsv5J","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarkView.js":"7YaI3","./views/previewView.js":"1FDQ6","./views/addRecipeView.js":"i6DNj","./config.js":"k5Hzs","regenerator-runtime/runtime":"dXNgZ","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("../modules/web.clear-immediate");
 require("../modules/web.set-immediate");
@@ -1867,8 +1871,8 @@ const clearBookmarks = function() {
 const uploadRecipe = async function(newRecipe) {
     try {
         console.log(Object.entries(newRecipe));
-        const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ing)=>{
-            const ingArr = ing[1].replaceAll(" ", "").split(",");
+        const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ingd)=>{
+            const ingArr = ingd[1].replaceAll(" ", "").split(",");
             if (ingArr.length !== 3) throw new Error("Wrong Ingredient format!! Please enter the correct one!!");
             const [quantity, unit, description] = ingArr;
             return {
@@ -2469,10 +2473,12 @@ parcelHelpers.export(exports, "API_URL", ()=>API_URL);
 parcelHelpers.export(exports, "timeOutSeconds", ()=>timeOutSeconds);
 parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
 parcelHelpers.export(exports, "KEY", ()=>KEY);
+parcelHelpers.export(exports, "MODEL_CLOSE_SEC", ()=>MODEL_CLOSE_SEC);
 const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
 const timeOutSeconds = 10;
 const RES_PER_PAGE = 10;
 const KEY = "08ba01d5-4e53-4d12-a8cf-f1d673e8de9f";
+const MODEL_CLOSE_SEC = 2.5;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -3210,6 +3216,7 @@ class addRecipeView extends (0, _viewDefault.default) {
     _overlay = document.querySelector(".overlay");
     _btnOpen = document.querySelector(".nav-btn-add-recipe");
     _btnClose = document.querySelector(".btn-close-modal");
+    _Message = "Recipe was successfully uploaded :)";
     constructor(){
         super();
         this._addHandlerShowWindow();

@@ -113,17 +113,17 @@ const controlBookmarks = () => {
   bookmarkView.render(model.state.bookmarks);
 }
 
-const controlAddRecipe = (newRecipe) => {
+const controlAddRecipe = async (newRecipe) => {
   try{
 
   //upload new recipe data  
-  model.uploadRecipe(newRecipe)
+  await model.uploadRecipe(newRecipe)
   console.log(model.state.recipe)
 
   //render.recipe
   recipeView.render(model.state.recipe);
 
-  //render success
+  //success message
   addRecipeView.renderSuccess();
 
   //close form function
@@ -132,6 +132,7 @@ const controlAddRecipe = (newRecipe) => {
   },MODEL_CLOSE_SEC*1000);
 
 }catch(err){
+  console.log(err);
   addRecipeView.renderError(err.message);
 }
 }
