@@ -619,6 +619,8 @@ const controlBookmarks = ()=>{
 };
 const controlAddRecipe = async (newRecipe)=>{
     try {
+        //renderSpinner
+        (0, _addRecipeViewJsDefault.default).renderSpinner();
         //upload new recipe data  
         await _modelJs.uploadRecipe(newRecipe);
         console.log(_modelJs.state.recipe);
@@ -626,6 +628,10 @@ const controlAddRecipe = async (newRecipe)=>{
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
         //success message
         (0, _addRecipeViewJsDefault.default).renderSuccess();
+        //render bookmarks View
+        (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
+        //change ID in URL
+        window.history.pushState(null, "", `#${_modelJs.state.recipe.id}`);
         //close form function
         setTimeout(function() {
             (0, _addRecipeViewJsDefault.default)._toggleWindow();
@@ -1779,6 +1785,7 @@ parcelHelpers.export(exports, "deleteBookmark", ()=>deleteBookmark);
 parcelHelpers.export(exports, "uploadRecipe", ()=>uploadRecipe);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("../config");
+// import { getJSON , sendJSON } from "../helper"
 var _helper = require("../helper");
 const state = {
     recipe: {},
@@ -1808,7 +1815,7 @@ const createRecipeObject = function(data) {
 };
 const loadRecipe = async function(id) {
     try {
-        const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}/${id}`);
+        const data = await (0, _helper.AJAX)(`${(0, _config.API_URL)}/${id}?key=${(0, _config.KEY)}`);
         state.recipe = createRecipeObject(data);
         if (state.bookmarks.some((bookmark)=>bookmark.id === id)) state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
@@ -1819,13 +1826,16 @@ const loadRecipe = async function(id) {
 const loadSearchResults = async function(query) {
     try {
         state.search.query = query;
-        const data = await (0, _helper.getJSON)(`${(0, _config.API_URL)}?search=${query}`);
+        const data = await (0, _helper.AJAX)(`${(0, _config.API_URL)}?search=${query}&key=${(0, _config.KEY)}`);
         state.search.results = data.data.recipes.map((rec)=>{
             return {
                 id: rec.id,
                 title: rec.title,
                 publisher: rec.publisher,
-                image: rec.image_url
+                image: rec.image_url,
+                ...rec.key && {
+                    key: rec.key
+                }
             };
         });
         state.search.page = 1;
@@ -1871,8 +1881,10 @@ const clearBookmarks = function() {
 const uploadRecipe = async function(newRecipe) {
     try {
         console.log(Object.entries(newRecipe));
-        const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ingd)=>{
-            const ingArr = ingd[1].replaceAll(" ", "").split(",");
+        const ingredients = Object.entries(newRecipe).filter((entry)=>entry[0].startsWith("Ingredient") && entry[1] !== "").map((ing)=>{
+            const ingArr = ing[1].split(",").map((el)=>el.trim());
+            //  .replaceAll(' ','')
+            //  .split(',');
             if (ingArr.length !== 3) throw new Error("Wrong Ingredient format!! Please enter the correct one!!");
             const [quantity, unit, description] = ingArr;
             return {
@@ -1890,7 +1902,7 @@ const uploadRecipe = async function(newRecipe) {
             servings: +newRecipe.servings,
             ingredients
         };
-        const data = await (0, _helper.sendJSON)(`${(0, _config.API_URL)}?key=${(0, _config.KEY)}`, recipe);
+        const data = await (0, _helper.AJAX)(`${(0, _config.API_URL)}?key=${(0, _config.KEY)}`, recipe);
         console.log(data);
         state.recipe = createRecipeObject(data);
         addBookmark(state.recipe);
@@ -1899,7 +1911,7 @@ const uploadRecipe = async function(newRecipe) {
     }
 };
 
-},{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","../helper":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
+},{"regenerator-runtime":"dXNgZ","../config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../helper":"lVRAz"}],"dXNgZ":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -2513,8 +2525,8 @@ exports.export = function(dest, destName, get) {
 },{}],"lVRAz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getJSON", ()=>getJSON);
-parcelHelpers.export(exports, "sendJSON", ()=>sendJSON);
+parcelHelpers.export(exports, "AJAX", ()=>AJAX);
+var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("./config");
 const timeout = function(s) {
     return new Promise(function(_, reject) {
@@ -2523,28 +2535,15 @@ const timeout = function(s) {
         }, s * 1000);
     });
 };
-const getJSON = async function(url) {
+const AJAX = async function(url, uploadData) {
     try {
-        const res = await Promise.race([
-            fetch(url),
-            timeout((0, _config.timeOutSeconds))
-        ]);
-        const data = await res.json();
-        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-        return data;
-    } catch (err) {
-        throw err;
-    }
-};
-const sendJSON = async function(url, uploadData) {
-    try {
-        const fetchPro = fetch(url, {
+        const fetchPro = uploadData ? fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(uploadData)
-        });
+        }) : fetch(url);
         const res = await Promise.race([
             fetchPro,
             timeout((0, _config.timeOutSeconds))
@@ -2555,9 +2554,41 @@ const sendJSON = async function(url, uploadData) {
     } catch (err) {
         throw err;
     }
-};
+} /*
+export const getJSON = async function(url){
+   try{
+    const fetchPro = fetch(url);
+    const res = await Promise.race([fetchPro,timeout(timeOutSeconds)])
+    const data = await res.json(); 
+    
+    if(!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data; 
+   } catch(err){
+    throw(err);
+   }
+}
+export const sendJSON = async function(url,uploadData){
+   try{
+    const fetchPro = fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(uploadData)
+    });
 
-},{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
+    const res = await Promise.race([fetchPro,timeout(timeOutSeconds)])
+    const data = await res.json(); 
+    
+    if(!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data; 
+   } catch(err){
+    throw(err);
+   }
+}
+*/ ;
+
+},{"regenerator-runtime":"dXNgZ","./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l60JC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 //icons
@@ -2630,9 +2661,12 @@ class recipeView extends (0, _viewDefault.default) {
       </div>
       </div> 
     
-     <div class="recipe-user-generated">
-     
+     <div class="recipe-user-generated ${this._data.key ? "" : "hidden"}">
+     <svg>
+         <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+     </svg>
      </div>
+
      <button class="btn-round btn-bookmark">
      <svg>
         <use href="${0, _iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? "-fill" : ""}"></use>
@@ -3114,7 +3148,12 @@ class previewView extends (0, _viewDefault.default) {
         <div class="preview-data">
             <h4 class="preview-title">${this._data.title} </h4>
             <p class="preview-publisher">${this._data.publisher}</p>
-        </div>
+            <div class="preview-user-generated ${this._data.key ? "" : "hidden"}">
+            <svg>
+            <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+            </svg>
+            </div>
+     </div>
     </a>
     </li>   
     `;
