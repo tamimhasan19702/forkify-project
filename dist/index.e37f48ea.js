@@ -1863,7 +1863,6 @@ const uploadRecipe = async function(newRecipe) {
                 description
             };
         });
-        console.log(recipe);
         const recipe = {
             title: newRecipe.title,
             source_url: newRecipe.sourceUrl,
@@ -1873,7 +1872,7 @@ const uploadRecipe = async function(newRecipe) {
             servings: +newRecipe.servings,
             ingredients
         };
-        const data = (0, _helper.sendJSON)(`${(0, _config.API_URL)}?key=${(0, _config.KEY)}`, recipe);
+        const data = await (0, _helper.sendJSON)(`${(0, _config.API_URL)}?key=${(0, _config.KEY)}`, recipe);
         console.log(data);
     } catch (err) {
         throw err;
