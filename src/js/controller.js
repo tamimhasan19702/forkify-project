@@ -156,3 +156,5 @@ const init  = () => {
  addRecipeView.addHandlerUpload(controlAddRecipe);
   }
   init()
+
+  console.log('welcome to forkify')
